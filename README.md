@@ -6,7 +6,7 @@ pain.001 XML.** A single `parse_mt101(text)` call returns a `list[dict]`
 — one record per transaction — ready to feed straight into pain.001
 generation.
 
-> **Latest release: v0.0.1.** The second deliverable of the MT→MX
+> **Latest release: v0.0.2.** The second deliverable of the MT→MX
 > converter project (after
 > [`pacs008-loader-mt103`](https://github.com/sebastienrousseau/pacs008-loader-mt103)).
 > SWIFT MT-MX coexistence ends in **November 2025**; this loader bridges
@@ -145,7 +145,7 @@ synthesised (override downstream as needed):
 ## Out of scope
 
 This is the correct **core** MT101 → pain.001 mapping, not every
-optional field. Deliberately excluded in v0.0.1:
+optional field. Deliberately excluded in v0.0.2:
 
 - `:23E:` instruction codes, `:25:` / `:28D:` authorisation / sequence
   fields.
