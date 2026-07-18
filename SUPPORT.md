@@ -29,7 +29,7 @@ with the same triage data plus expected vs. actual behaviour.
 
 ## Feature requests
 
-Likely categories, all out of scope for v0.0.1:
+Likely categories, all out of scope for v0.0.2:
 
 - **FX legs** (`:33B:` instructed amount, `:36:` exchange rate, `:21F:`
   FX deal reference).
@@ -47,6 +47,6 @@ disclosure process in [SECURITY.md](SECURITY.md).
 
 | Version | Supported? |
 | :--- | :--- |
-| 0.0.1 (latest) | ✅ |
+| 0.0.2 (latest) | ✅ |
 
-Requires Python 3.10+ and `pain001 >= 0.0.53`.
+Requires Python 3.10+ and `pain001 >= 0.0.55`.

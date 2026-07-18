@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 This package's version follows the [`pain001`](https://github.com/sebastienrousseau/pain001)
 suite; the `0.0.1` release targets the `0.0.53` line of `pain001`.
 
+## [0.0.2] - 2026-07-18
+
+### Changed
+
+- Require `pain001 >= 0.0.55, < 1` (was `>= 0.0.53, < 1`) to propagate a
+  security fix released in the `pain001` core library. No API or mapping
+  changes in this loader.
+
 ## [0.0.1] - 2026-07-12
 
 ### Added
@@ -55,4 +63,5 @@ pain.001 generation.
 - Parsed records are verified schema-valid against the real `pain001`
   `SchemaValidator("pain.001.001.09")` in the test suite.
 
+[0.0.2]: https://github.com/sebastienrousseau/pain001-loader-mt101/releases/tag/v0.0.2
 [0.0.1]: https://github.com/sebastienrousseau/pain001-loader-mt101/releases/tag/v0.0.1
