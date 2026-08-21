@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 This package's version follows the [`pain001`](https://github.com/sebastienrousseau/pain001)
 suite; the `0.0.1` release targets the `0.0.53` line of `pain001`.
 
+## [0.0.61] - 2026-08-20
+
+Suite release with `pain001` 0.0.61. No change in this package.
+
+The core's 0.0.61 is a performance release — libxml2 XSD validation and
+a fix for quadratic CSV diagnostics — and neither touches the MT101
+parser, which does its own parsing and does not go through either path.
+The version moves because every member of the suite ships the same
+number.
+
 ## [0.0.60] - 2026-08-20
 
 Version-alignment release. No public API change and no change to the
