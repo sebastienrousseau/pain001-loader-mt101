@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 This package's version follows the [`pain001`](https://github.com/sebastienrousseau/pain001)
 suite; the `0.0.1` release targets the `0.0.53` line of `pain001`.
 
+## [0.0.62] - 2026-08-21
+
+### Added
+
+- **Benchmarks for the block-4 wire format and field-dense
+  transactions.** The 0.0.61 set measured one shape: a bare field list
+  with a uniform transaction. Banks send that list wrapped in
+  `{1:...}{2:...}{4: ... -}`, which is the only thing that exercises
+  `_unwrap_block4` — previously unbenchmarked. Measured at 1.10x a bare
+  list.
+
+  `_lookup` searches tag by tag, so the risk is it going quadratic in
+  the number of fields present, which uniform fixtures cannot show. A
+  transaction carrying every optional field costs 1.10x a minimal one.
+
+- **`ruff format --check` in CI**, which `pain001-loader-xlsx` already
+  enforced and this repo did not. Four files had drifted out of format
+  with nothing configured to notice — the same shape of gap as a
+  lockfile nobody installs from.
+
 ## [0.0.61] - 2026-08-20
 
 Suite release with `pain001` 0.0.61. No change in this package.

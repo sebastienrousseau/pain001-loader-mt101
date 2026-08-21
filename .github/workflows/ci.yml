@@ -85,5 +85,10 @@ jobs:
       - name: Ruff check
         run: ruff check pain001_loader_mt101/ tests/ examples/
 
+      # xlsx enforces this and this repo did not, so four files had
+      # drifted out of format without anything noticing.
+      - name: Ruff format check
+        run: ruff format --check pain001_loader_mt101/ tests/ examples/
+
       - name: Mypy
         run: mypy pain001_loader_mt101/

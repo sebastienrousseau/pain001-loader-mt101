@@ -103,3 +103,96 @@ def test_parsing_scales_linearly() -> None:
         f"and quadratic is ~16x, so this looks like the parser gained a "
         f"per-transaction scan over previously parsed fields"
     )
+
+
+#: Ceiling on the cost of the wire format relative to a bare field list,
+#: and of a field-rich transaction relative to a minimal one. Both
+#: measured at 1.10x.
+MAX_SHAPE_OVERHEAD = 3.0
+
+BLOCK4_HEADER = "{1:F01BANKDEFFAXXX0000000000}{2:I101BANKDEFFXXXXN}{4:\n"
+BLOCK4_TRAILER = "\n-}"
+
+
+def wrap_block4(body: str) -> str:
+    """Wrap a bare field list in the SWIFT block structure."""
+    return BLOCK4_HEADER + body + BLOCK4_TRAILER
+
+
+def build_rich_message(transactions: int) -> str:
+    """Build an MT101 whose transactions carry every optional field."""
+    blocks = "".join(
+        f":21:TXN-{i:06d}\n"
+        f":32B:EUR12345,67\n"
+        f":57A:CHASUS33\n"
+        f":59:/GB29NWBK60161331926819\n"
+        "ACME TRADING LTD\n"
+        "1 CORPORATE AVENUE\n"
+        "LONDON\n"
+        "EC1A 1BB\n"
+        f":70:INVOICE {i} LONG REMITTANCE INFORMATION LINE\n"
+        ":71A:SHA\n"
+        ":36:1,0\n"
+        for i in range(transactions)
+    )
+    return SEQUENCE_A + blocks
+
+
+class TestMessageShapes:
+    """Shapes the flat-list benchmark does not cover.
+
+    ``test_parse_1000_transactions`` measures a bare field list with a
+    uniform transaction. Two other shapes are what real traffic looks
+    like, and both exercise code the flat case never reaches.
+    """
+
+    @pytest.mark.benchmark
+    def test_parse_block4_wire_format(self, benchmark) -> None:
+        """Benchmark the wrapped form banks actually send.
+
+        A bare field list is the convenient shape for a fixture; the
+        wire carries it inside ``{1:...}{2:...}{4: ... -}``, which means
+        ``_unwrap_block4`` runs. Nothing benchmarked that path before.
+        """
+        text = wrap_block4(build_message(1000))
+
+        rows = benchmark(parse_mt101, text)
+
+        assert len(rows) == 1000
+        assert rows[0]["payment_id"] == "TXN-000000"
+
+    @pytest.mark.benchmark
+    def test_the_wire_format_is_not_expensive_to_unwrap(self) -> None:
+        """Unwrapping must cost about nothing.
+
+        Measured at 1.10x a bare list. The failure this guards is
+        unwrapping doing work proportional to the message more than
+        once -- a scan per field rather than a scan per message.
+        """
+        flat = build_message(500)
+        wrapped = wrap_block4(flat)
+
+        ratio = _best_of(wrapped) / _best_of(flat)
+        assert ratio < MAX_SHAPE_OVERHEAD, (
+            f"the block-4 wire format cost {ratio:.1f}x a bare field list; "
+            f"unwrapping should be a single scan"
+        )
+
+    @pytest.mark.benchmark
+    def test_optional_fields_do_not_cost_disproportionately(self) -> None:
+        """Field-rich transactions must not scale badly in field count.
+
+        ``_lookup`` searches tag by tag, so the risk is it becoming
+        quadratic in the number of fields present. Measured, a
+        transaction carrying every optional field costs 1.10x a minimal
+        one.
+        """
+        lean = build_message(500)
+        rich = build_rich_message(500)
+
+        ratio = _best_of(rich) / _best_of(lean)
+        assert ratio < MAX_SHAPE_OVERHEAD, (
+            f"transactions with every optional field cost {ratio:.1f}x "
+            f"minimal ones; this suggests per-field work that rescans "
+            f"the transaction"
+        )

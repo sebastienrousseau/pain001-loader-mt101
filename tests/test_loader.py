@@ -488,11 +488,7 @@ def test_empty_transaction_reference_raises() -> None:
 def test_missing_amount_raises() -> None:
     """A transaction without :32B: raises ValueError mentioning :32B:."""
     mt101 = (
-        ":20:REF\n"
-        ":30:260712\n"
-        ":21:TXN1\n"
-        ":59:/GB29NWBK60161331926819\n"
-        "ACME TRADING LTD\n"
+        ":20:REF\n:30:260712\n:21:TXN1\n:59:/GB29NWBK60161331926819\nACME TRADING LTD\n"
     )
     with pytest.raises(ValueError, match=":32B:"):
         parse_mt101(mt101)
