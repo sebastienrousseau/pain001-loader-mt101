@@ -1,6 +1,6 @@
 [project]
 name = "pain001-loader-mt101"
-version = "0.0.62"
+version = "0.0.65"
 description = "Convert legacy SWIFT MT101 requests for transfer to ISO 20022 pain.001 flat records."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -60,6 +60,10 @@ build-backend = "hatchling.build"
 packages = ["pain001_loader_mt101"]
 
 [tool.ruff]
+# The vendored conformance test carries a sha256 of its own
+# bytes, so `ruff format` rewriting it would invalidate the
+# very check it exists to make. Maintained centrally.
+extend-exclude = ["tests/test_suite_conformance.py"]
 line-length = 88
 target-version = "py310"
 
