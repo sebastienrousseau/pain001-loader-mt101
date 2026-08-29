@@ -110,8 +110,7 @@ def check() -> tuple[list[str], dict[str, object]]:
             problems.append(f"{name}: could not read PyPI")
         elif core_published and version != core_published:
             problems.append(
-                f"{name}: published {version}, but the suite is at "
-                f"{core_published}"
+                f"{name}: published {version}, but the suite is at {core_published}"
             )
 
     return problems, {
