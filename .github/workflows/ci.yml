@@ -39,6 +39,13 @@ jobs:
             --cov-report=xml \
             --cov-fail-under=100
 
+      # Not a timing gate -- wall-clock is not comparable between
+      # runners. This proves the benchmark still runs against the
+      # current API rather than rotting into a file that reads as
+      # verified and is not.
+      - name: Run the benchmark
+        run: python benches/bench_parse_mt101.py --quick
+
       - name: Enforce 100% docstring coverage
         run: interrogate -c pyproject.toml pain001_loader_mt101
 
@@ -83,12 +90,12 @@ jobs:
           pip install -e ".[dev]"
 
       - name: Ruff check
-        run: ruff check pain001_loader_mt101/ tests/ examples/
+        run: ruff check pain001_loader_mt101/ tests/ examples/ benches/ scripts/
 
       # xlsx enforces this and this repo did not, so four files had
       # drifted out of format without anything noticing.
       - name: Ruff format check
-        run: ruff format --check pain001_loader_mt101/ tests/ examples/
+        run: ruff format --check pain001_loader_mt101/ tests/ examples/ benches/ scripts/
 
       - name: Mypy
         run: mypy pain001_loader_mt101/

@@ -7,6 +7,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 This package's version follows the [`pain001`](https://github.com/sebastienrousseau/pain001)
 suite; the `0.0.1` release targets the `0.0.53` line of `pain001`.
 
+## [0.0.65] - 2026-08-29
+
+Aligns the `pain001` suite on one version number, and adds the gates this
+repository was missing.
+
+### Added
+
+- `benches/bench_parse_mt101.py`. MT101 genuinely batches — sequence B
+  repeats once per instruction — so unlike the MT103 loader there is a
+  real scaling axis, and it is the one a payroll run moves along. Cost
+  is linear across ten to five thousand instructions (exponent 1.03,
+  roughly 6-8 µs each).
+- The benchmark prints the **record count** beside the timings. A loader
+  that silently stopped after the first instruction would show a falling
+  µs/txn as the input grew — batching to read, dividing by work never
+  done in fact. The sibling `pain001-loader-mt103` behaves exactly that
+  way because an MT103 carries one transfer, and the two are easy to
+  assume alike.
+- `docs/benchmarks.md`, `CONTRIBUTING.md`.
+- `scripts/check_suite_consistency.py` and a scheduled `Suite
+  Consistency` workflow comparing this tree, and every published member,
+  against PyPI.
+- `tests/test_suite_conformance.py`, the shared suite conformance gate.
+
+### Changed
+
+- Version aligned to `0.0.65` across all five `pain001` packages, which
+  had drifted to `0.0.62`, `0.0.64`, `0.0.63`, `0.0.62` and `0.0.63`.
+- `SECURITY.md`'s supported-version table follows the bump.
+
 ## [0.0.62] - 2026-08-21
 
 ### Added
