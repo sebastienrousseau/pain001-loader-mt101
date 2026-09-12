@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 This package's version follows the [`pain001`](https://github.com/sebastienrousseau/pain001)
 suite; the `0.0.1` release targets the `0.0.53` line of `pain001`.
 
+## [0.0.66] - 2026-09-12
+
+Aligns the `pain001` suite on `0.0.66`, the core release that adds
+cross-record duplicate detection, the `/api/v1/ui` dashboard, GPG
+flags and OpenTelemetry spans. Nothing in this package changed.
+
+### Changed
+
+- Version aligned to `0.0.66` across all five `pain001` packages.
+- `SECURITY.md`'s supported-version table follows the bump.
+
 ## [0.0.65] - 2026-08-29
 
 Aligns the `pain001` suite on one version number, and adds the gates this
