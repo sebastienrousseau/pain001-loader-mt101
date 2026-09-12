@@ -15,6 +15,6 @@ one record is returned per transaction.
 
 from pain001_loader_mt101.loader import parse_mt101
 
-__version__ = "0.0.68"
+__version__ = "0.0.69"
 
 __all__ = ["parse_mt101", "__version__"]
