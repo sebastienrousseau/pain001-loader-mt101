@@ -41,3 +41,19 @@ check: test lint typecheck docstrings examples ## Run every gate.
 clean: ## Remove caches and build artefacts.
 	rm -rf .pytest_cache .mypy_cache .ruff_cache .coverage build dist *.egg-info
 	find . -type d -name __pycache__ -prune -exec rm -rf {} +
+
+# Mutation score floor for the parser: 90.4% (312 of 345) on 2026-09-18.
+# The floor sits under it so one flaky mutant cannot block a release.
+# Raise it when the score rises; never lower it to make a red run green.
+MUTATION_FLOOR ?= 88
+
+docs: ## Build the Sphinx documentation (warnings are errors)
+	sphinx-build -W --keep-going -b html docs docs/_build/html
+
+mutate: ## Mutation testing (mutmut 3, config in pyproject)
+	rm -rf mutants
+	python -m mutmut run
+	python -m mutmut export-cicd-stats
+	python scripts/mutation_gate.py --floor $(MUTATION_FLOOR)
+
+.PHONY: docs mutate
