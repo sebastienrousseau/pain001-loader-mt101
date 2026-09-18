@@ -1,0 +1,24 @@
+# SPDX-License-Identifier: Apache-2.0 OR MIT
+cff-version: 1.2.0
+message: "If you use pain001-loader-mt101 in research or production write-ups, please cite it as below."
+type: software
+title: "pain001-loader-mt101: SWIFT MT101 to ISO 20022 pain.001 records"
+abstract: >-
+  A loader plugin for the pain001 library that parses legacy SWIFT MT101
+  Request for Transfer messages into the flat records pain001 validates and
+  turns into ISO 20022 pain.001 XML, one record per transaction.
+authors:
+  - family-names: Rousseau
+    given-names: Sebastien
+    email: sebastian.rousseau@gmail.com
+version: "0.0.70"
+date-released: "2026-09-13"
+license: "Apache-2.0 OR MIT"
+repository-code: "https://github.com/sebastienrousseau/pain001-loader-mt101"
+url: "https://pain001.com"
+keywords:
+  - ISO 20022
+  - pain.001
+  - SWIFT MT101
+  - MT to MX migration
+  - payments
