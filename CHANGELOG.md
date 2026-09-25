@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 This package's version follows the [`pain001`](https://github.com/sebastienrousseau/pain001)
 suite; the `0.0.1` release targets the `0.0.53` line of `pain001`.
 
+## [0.0.71] - 2026-09-26
+
+Aligns the `pain001` suite on `0.0.71`, the core's coordinated release:
+request-local CEL policy rules, review-only correction suggestions,
+explicit SFTP upload delivery, and release artifact inspection.
+Nothing in this package changed.
+
+### Changed
+
+- Version aligned to `0.0.71` across all five `pain001` packages.
+- `SECURITY.md`'s supported-version table follows the bump.
+
 ## [0.0.70] - 2026-09-13
 
 Aligns the `pain001` suite on `0.0.70`: the core's rail rules now read the

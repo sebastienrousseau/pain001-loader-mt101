@@ -10,7 +10,8 @@ security fixes; older `0.0.x` versions do not.
 
 | Version | Status | Receives security fixes? |
 | :--- | :--- | :--- |
-| `0.0.70` (latest) | Current | ✅ Yes |
+| `0.0.71` (latest) | Current | ✅ Yes |
+| `0.0.70` | Prior | ✅ Yes |
 
 ## Reporting a vulnerability
 
