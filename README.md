@@ -6,7 +6,7 @@ pain.001 XML.** A single `parse_mt101(text)` call returns a `list[dict]`
 — one record per transaction — ready to feed straight into pain.001
 generation.
 
-> **Ships with the pain001 suite, at the suite's version (0.0.70).** The
+> **Ships with the pain001 suite, at the suite's version (0.0.71).** The
 > second deliverable of the MT→MX converter project (after
 > [`pacs008-loader-mt103`](https://github.com/sebastienrousseau/pacs008-loader-mt103)).
 > SWIFT ended MT-MX coexistence for cross-border payment instructions on
