@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 This package's version follows the [`pain001`](https://github.com/sebastienrousseau/pain001)
 suite; the `0.0.1` release targets the `0.0.53` line of `pain001`.
 
+## [Unreleased]
+
+### Changed
+
+- The README and the documentation index link
+  [What is pain.001?](https://pain001.com/pain-001/), an explainer of the
+  target message's structure and versions.
+
 ## [0.0.71] - 2026-09-26
 
 Aligns the `pain001` suite on `0.0.71`, the core's coordinated release:

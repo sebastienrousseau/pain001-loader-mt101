@@ -41,6 +41,9 @@ MT101 maps to records that pass
 `SchemaValidator("pain.001.001.09").validate_batch(...)` with zero
 errors.
 
+New to the target format? [What is pain.001?](https://pain001.com/pain-001/)
+explains its structure, versions and how it replaces MT101.
+
 ## Install
 
 `pain001-loader-mt101` requires **Python 3.10+** and pulls in `pain001`

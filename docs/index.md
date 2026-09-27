@@ -3,6 +3,9 @@
 SWIFT MT101 to ISO 20022 pain.001 records, as a loader plugin for the
 [pain001](https://github.com/sebastienrousseau/pain001) ISO 20022 library.
 
+New to the target format? [What is pain.001?](https://pain001.com/pain-001/)
+explains its structure, versions and how it replaces MT101.
+
 ```{toctree}
 :maxdepth: 2
 :caption: Contents
