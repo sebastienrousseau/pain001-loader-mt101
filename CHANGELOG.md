@@ -9,8 +9,17 @@ suite; the `0.0.1` release targets the `0.0.53` line of `pain001`.
 
 ## [Unreleased]
 
+Nothing yet.
+
+## [0.0.72] - 2026-09-28
+
+Aligns the `pain001` suite on `0.0.72`, the core's coordinated release:
+ISO 20022 schemas and Schematron validation rules, SLSA level 3 provenance
+attestations, and dependency updates. Nothing in this package changed.
+
 ### Changed
 
+- Version aligned to `0.0.72` across all `pain001` packages.
 - The README and the documentation index link
   [What is pain.001?](https://pain001.com/pain-001/), an explainer of the
   target message's structure and versions.
