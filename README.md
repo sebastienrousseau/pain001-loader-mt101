@@ -6,7 +6,7 @@ pain.001 XML.** A single `parse_mt101(text)` call returns a `list[dict]`
 — one record per transaction — ready to feed straight into pain.001
 generation.
 
-> **Ships with the pain001 suite, at the suite's version (0.0.71).** The
+> **Ships with the pain001 suite, at the suite's version (0.0.72).** The
 > second deliverable of the MT→MX converter project (after
 > [`pacs008-loader-mt103`](https://github.com/sebastienrousseau/pacs008-loader-mt103)).
 > SWIFT ended MT-MX coexistence for cross-border payment instructions on
@@ -40,6 +40,9 @@ transaction. The correctness proof is that a realistic multi-transaction
 MT101 maps to records that pass
 `SchemaValidator("pain.001.001.09").validate_batch(...)` with zero
 errors.
+
+New to the target format? [What is pain.001?](https://pain001.com/pain-001/)
+explains its structure, versions and how it replaces MT101.
 
 ## Install
 
