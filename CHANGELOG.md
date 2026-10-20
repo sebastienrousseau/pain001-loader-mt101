@@ -11,6 +11,17 @@ suite; the `0.0.1` release targets the `0.0.53` line of `pain001`.
 
 Nothing yet.
 
+## [0.0.73] - 2026-10-20
+
+Suite release with `pain001` 0.0.73. No change to the loader's behaviour or its plugin contract (`pain001 >= 0.0.55, < 1`).
+
+### Changed
+
+- `test_sequence_b_overrides_sequence_a_party_fields` used an IBAN that fails mod-97 and BICs the core validator rejects; it now uses valid sample data.
+- Every SPDX header states the declared `Apache-2.0 OR MIT` grant.
+- `make format` and `make lint` run what CI enforces (ruff, the same paths, plus the format check) instead of an uninstalled black.
+- GitHub Actions updated (7 actions).
+
 ## [0.0.72] - 2026-09-28
 
 Aligns the `pain001` suite on `0.0.72`, the core's coordinated release:
