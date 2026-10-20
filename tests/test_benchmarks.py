@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0 OR MIT
+
 """Performance benchmarks for the MT101 parser.
 
 There are two different things here, and they guard different failures.
