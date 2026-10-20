@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: Apache-2.0
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 # Copyright (C) 2023-2026 Sebastien Rousseau. All rights reserved.
 
 """Tests for the pain001-loader-mt101 loader."""
@@ -167,14 +167,14 @@ def test_sequence_b_overrides_sequence_a_party_fields() -> None:
     mt101 = (
         ":20:REF\n"
         ":30:260712\n"
-        ":50K:/DE00000000000000000000\n"
+        ":50K:/FR1420041010050500013M02606\n"
         "SEQ A CUSTOMER\n"
-        ":52A:AAAAAAAA\n"
+        ":52A:BNPAFRPP\n"
         ":21:TXN1\n"
         ":32B:EUR100,00\n"
         ":50K:/GB29NWBK60161331926819\n"
         "BLOCK CUSTOMER\n"
-        ":52A:BBBBBBBB\n"
+        ":52A:NWBKGB2L\n"
         ":57A:CHASUS33\n"
         ":59:/GB29NWBK60161331926819\n"
         "BENEFICIARY LTD\n"
@@ -182,7 +182,7 @@ def test_sequence_b_overrides_sequence_a_party_fields() -> None:
     )
     (record,) = parse_mt101(mt101)
     assert record["debtor_name"] == "BLOCK CUSTOMER"
-    assert record["debtor_agent_BIC"] == "BBBBBBBB"
+    assert record["debtor_agent_BIC"] == "NWBKGB2L"
     assert record["debtor_account_IBAN"] == "GB29NWBK60161331926819"
 
 
