@@ -1,10 +1,10 @@
-# SPDX-License-Identifier: Apache-2.0
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 # Convenience targets for pain001-loader-mt101.
 
 PY ?= .venv/bin/python
 PKG := pain001_loader_mt101
 
-.PHONY: help install test cov lint format typecheck docstrings examples check clean
+.PHONY: help install test cov lint format typecheck docstrings examples check clean docs mutate
 
 help: ## Show this help.
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
@@ -20,12 +20,16 @@ test: ## Run the test suite with the 100% coverage gate.
 
 cov: test ## Alias for the coverage-gated test run.
 
-lint: ## Ruff lint.
-	$(PY) -m ruff check $(PKG) tests examples
+# Same paths CI lints, so a green `make lint` means a green lint job.
+LINT_PATHS := $(PKG) tests examples benches scripts
 
-format: ## Format with black + ruff import sort.
-	black $(PKG) tests examples
-	$(PY) -m ruff check --fix $(PKG) tests examples
+lint: ## Ruff lint and format check (what CI runs).
+	$(PY) -m ruff check $(LINT_PATHS)
+	$(PY) -m ruff format --check $(LINT_PATHS)
+
+format: ## Format with ruff (the formatter CI enforces) and fix imports.
+	$(PY) -m ruff format $(LINT_PATHS)
+	$(PY) -m ruff check --fix $(LINT_PATHS)
 
 typecheck: ## Strict mypy.
 	$(PY) -m mypy $(PKG)
@@ -48,12 +52,11 @@ clean: ## Remove caches and build artefacts.
 MUTATION_FLOOR ?= 88
 
 docs: ## Build the Sphinx documentation (warnings are errors)
-	sphinx-build -W --keep-going -b html docs docs/_build/html
+	$(PY) -m sphinx -W --keep-going -b html docs docs/_build/html
 
 mutate: ## Mutation testing (mutmut 3, config in pyproject)
 	rm -rf mutants
-	python -m mutmut run
-	python -m mutmut export-cicd-stats
-	python scripts/mutation_gate.py --floor $(MUTATION_FLOOR)
+	$(PY) -m mutmut run
+	$(PY) -m mutmut export-cicd-stats
+	$(PY) scripts/mutation_gate.py --floor $(MUTATION_FLOOR)
 
-.PHONY: docs mutate

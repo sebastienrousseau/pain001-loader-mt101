@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: Apache-2.0
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 # Copyright (C) 2023-2026 Sebastien Rousseau. All rights reserved.
 
 """Minimal example: parse an MT101 payload and inspect the flat records.
