@@ -124,11 +124,9 @@ _FIELD_HEAD_RE = re.compile(r"^:(\d{2}[A-Z]?):", re.MULTILINE)
 # :32B:EUR1234,56  ->  CCY (3 alpha) | amount (comma-decimal). No value date.
 # A SWIFT amount is at least one digit with at most one decimal comma and
 # never a dot: "1.234" is a thousands separator or a foreign decimal point,
-# and reading it either way would be a guess about someone's money.
-_F32B_RE = re.compile(r"^(?P<ccy>[A-Z]{3})(?P<amt>\d+(?:,\d*)?)$")
-
-# SWIFT amounts are 15d: at most 15 characters, the decimal comma included.
-_AMOUNT_MAX_LEN = 15
+# and reading it either way would be a guess about someone's money. SWIFT
+# amounts are 15d: at most 15 characters, the decimal comma included.
+_F32B_RE = re.compile(r"^(?P<ccy>[A-Z]{3})(?P<amt>(?=[\d,]{1,15}$)\d+(?:,\d*)?)$")
 
 # :30: requested execution date is exactly six digits (YYMMDD).
 _DATE_RE = re.compile(r"^\d{6}$")
@@ -307,7 +305,7 @@ def _parse_f32b(value: str) -> tuple[str, float]:
             most).
     """
     match = _F32B_RE.match(value.replace("\n", "").strip())
-    if not match or len(match.group("amt")) > _AMOUNT_MAX_LEN:
+    if not match:
         raise ValueError(f"Malformed :32B: currency/amount {value!r}")
     return match.group("ccy"), _parse_amount(match.group("amt"))
 
@@ -328,6 +326,39 @@ def _lookup(sources: list[dict[str, str]], tags: tuple[str, ...]) -> str | None:
 # --- Transaction parser -----------------------------------------------------
 
 
+def _debtor(
+    block: dict[str, str], seq_a: dict[str, str]
+) -> tuple[str | None, str | None]:
+    """Return the ordering customer's (name, account), either may be ``None``.
+
+    A sequence-B ``:50a:`` overrides the sequence-A one; with neither, both
+    are ``None``.
+    """
+    ordering = _lookup([block, seq_a], _ORDERING_TAGS)
+    if ordering is None:
+        return None, None
+    return _party_name(ordering), _party_account(ordering)
+
+
+def _creditor(block: dict[str, str], txn_ref: str) -> tuple[str, str | None]:
+    """Return the beneficiary's (name, account) from the ``:59a:`` field.
+
+    Raises:
+        ValueError: If the transaction has no beneficiary field, or the
+            field carries no name.
+    """
+    beneficiary = _lookup([block], _BENEFICIARY_TAGS)
+    if beneficiary is None:
+        raise ValueError(
+            f"MT101 transaction :21:{txn_ref} missing required "
+            "beneficiary :59:/:59A:/:59F:"
+        )
+    creditor_name = _party_name(beneficiary)
+    if not creditor_name:
+        raise ValueError(f"MT101 transaction :21:{txn_ref} beneficiary carries no name")
+    return creditor_name, _party_account(beneficiary)
+
+
 def _parse_transaction(block: dict[str, str], seq_a: dict[str, str]) -> dict[str, Any]:
     """Parse one sequence-B block (with sequence-A fallbacks) into a record.
 
@@ -345,13 +376,7 @@ def _parse_transaction(block: dict[str, str], seq_a: dict[str, str]) -> dict[str
         )
     currency, amount = _parse_f32b(block["32B"])
 
-    ordering = _lookup([block, seq_a], _ORDERING_TAGS)
-    if ordering is not None:
-        debtor_name = _party_name(ordering)
-        debtor_account = _party_account(ordering)
-    else:
-        debtor_name = None
-        debtor_account = None
+    debtor_name, debtor_account = _debtor(block, seq_a)
 
     servicing = _lookup([block, seq_a], _SERVICING_TAGS)
     debtor_agent = _party_bic(servicing) if servicing is not None else None
@@ -359,27 +384,20 @@ def _parse_transaction(block: dict[str, str], seq_a: dict[str, str]) -> dict[str
     account_with = _lookup([block], _ACCOUNT_WITH_TAGS)
     creditor_agent = _party_bic(account_with) if account_with is not None else None
 
-    beneficiary = _lookup([block], _BENEFICIARY_TAGS)
-    if beneficiary is None:
-        raise ValueError(
-            f"MT101 transaction :21:{txn_ref} missing required "
-            "beneficiary :59:/:59A:/:59F:"
-        )
-    creditor_name = _party_name(beneficiary)
-    if not creditor_name:
-        raise ValueError(f"MT101 transaction :21:{txn_ref} beneficiary carries no name")
-    creditor_account = _party_account(beneficiary)
+    creditor_name, creditor_account = _creditor(block, txn_ref)
 
     charge_code = block.get("71A", "").strip().upper()
     charge_bearer = _CHARGE_BEARER.get(charge_code, _DEFAULT_CHARGE_BEARER)
 
     remittance = " ".join(block.get("70", "").split()) or _DEFAULT_REMITTANCE
 
+    # In record order: the keys every transaction carries, then the optional
+    # ones (_OPTIONAL_KEYS), which a record omits when they are empty.
     return {
+        "charge_bearer": charge_bearer,
         "payment_id": txn_ref,
         "payment_amount": amount,
         "currency": currency,
-        "charge_bearer": charge_bearer,
         "creditor_name": creditor_name,
         "remittance_information": remittance[:140],
         "initiator_name": debtor_name,
@@ -404,6 +422,30 @@ _OPTIONAL_KEYS = (
 
 
 # --- Top-level parser -------------------------------------------------------
+
+
+def _message_header(seq_a: dict[str, str]) -> tuple[str, str]:
+    """Return sequence A's (sender's reference, ISO execution date).
+
+    Raises:
+        ValueError: If ``:20:`` or ``:30:`` is missing, or ``:30:`` is
+            malformed.
+    """
+    msg_ref = seq_a.get("20", "").strip()
+    if not msg_ref:
+        raise ValueError("MT101 payload missing required :20: sender's reference")
+
+    exec_raw = seq_a.get("30", "").strip()
+    if not exec_raw:
+        raise ValueError("MT101 payload missing required :30: requested execution date")
+    return msg_ref, _parse_date(exec_raw)
+
+
+def _record(header: dict[str, Any], txn: dict[str, Any]) -> dict[str, Any]:
+    """One flat record: the group header, then the transaction's keys, less
+    the optional ones whose source field was absent."""
+    kept = {k: v for k, v in txn.items() if v or k not in _OPTIONAL_KEYS}
+    return {**header, **kept}
 
 
 def parse_mt101(text: str) -> list[dict[str, Any]]:
@@ -433,46 +475,21 @@ def parse_mt101(text: str) -> list[dict[str, Any]]:
             message names the offending field.
     """
     seq_a, blocks = _split_sequences(list(_iter_fields(text)))
-
-    msg_ref = seq_a.get("20", "").strip()
-    if not msg_ref:
-        raise ValueError("MT101 payload missing required :20: sender's reference")
-
-    exec_raw = seq_a.get("30", "").strip()
-    if not exec_raw:
-        raise ValueError("MT101 payload missing required :30: requested execution date")
-    exec_date = _parse_date(exec_raw)
+    msg_ref, exec_date = _message_header(seq_a)
 
     if not blocks:
         raise ValueError("MT101 payload has no transaction (missing sequence B / :21:)")
 
     transactions = [_parse_transaction(block, seq_a) for block in blocks]
-    nb_of_txs = len(transactions)
-    ctrl_sum = round(sum(txn["payment_amount"] for txn in transactions), 2)
-
-    records: list[dict[str, Any]] = []
-    for txn in transactions:
-        record: dict[str, Any] = {
-            "id": msg_ref,
-            "date": exec_date,
-            "nb_of_txs": nb_of_txs,
-            "ctrl_sum": ctrl_sum,
-            "payment_information_id": msg_ref,
-            "payment_method": "TRF",
-            "batch_booking": False,
-            "service_level_code": _DEFAULT_SERVICE_LEVEL,
-            "requested_execution_date": exec_date,
-            "charge_bearer": txn["charge_bearer"],
-            "payment_id": txn["payment_id"],
-            "payment_amount": txn["payment_amount"],
-            "currency": txn["currency"],
-            "creditor_name": txn["creditor_name"],
-            "remittance_information": txn["remittance_information"],
-        }
-        for key in _OPTIONAL_KEYS:
-            value = txn[key]
-            if value:
-                record[key] = value
-        records.append(record)
-
-    return records
+    header: dict[str, Any] = {
+        "id": msg_ref,
+        "date": exec_date,
+        "nb_of_txs": len(transactions),
+        "ctrl_sum": round(sum(txn["payment_amount"] for txn in transactions), 2),
+        "payment_information_id": msg_ref,
+        "payment_method": "TRF",
+        "batch_booking": False,
+        "service_level_code": _DEFAULT_SERVICE_LEVEL,
+        "requested_execution_date": exec_date,
+    }
+    return [_record(header, txn) for txn in transactions]
