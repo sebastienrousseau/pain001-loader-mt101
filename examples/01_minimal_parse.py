@@ -35,14 +35,41 @@ LES FLEURS SARL
 """
 
 
+# Record keys that identify a person or an account. A real MT101 carries
+# real names and IBANs, so the example names these keys and redacts their
+# values instead of printing them, the way a log line should.
+PARTY_KEYS = frozenset(
+    {
+        "initiator_name",
+        "debtor_name",
+        "debtor_account_IBAN",
+        "debtor_agent_BIC",
+        "creditor_name",
+        "creditor_account_IBAN",
+        "creditor_agent_BIC",
+    }
+)
+
+
 def main() -> None:
-    """Parse the demo MT101 and print each resulting pain.001 record."""
+    """Parse the demo MT101 and print each pain.001 record, parties redacted."""
     records = parse_mt101(MT101)
     print(f"{len(records)} transaction(s) parsed\n")
     for index, record in enumerate(records, start=1):
         print(f"--- transaction {index} ---")
-        for key, value in record.items():
-            print(f"{key:24}: {value!r}")
+        print(f"{'id':24}: {record['id']!r}")
+        print(
+            f"{'requested_execution_date':24}: {record['requested_execution_date']!r}"
+        )
+        print(f"{'payment_id':24}: {record['payment_id']!r}")
+        print(f"{'payment_amount':24}: {record['payment_amount']!r}")
+        print(f"{'currency':24}: {record['currency']!r}")
+        print(f"{'charge_bearer':24}: {record['charge_bearer']!r}")
+        print(f"{'remittance_information':24}: {record['remittance_information']!r}")
+        print(f"{'nb_of_txs':24}: {record['nb_of_txs']!r}")
+        print(f"{'ctrl_sum':24}: {record['ctrl_sum']!r}")
+        for key in sorted(PARTY_KEYS & record.keys()):
+            print(f"{key:24}: <redacted>")
         print()
 
 
