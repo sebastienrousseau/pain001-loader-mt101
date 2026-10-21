@@ -26,3 +26,5 @@ uv.lock
 
 # Hypothesis example database (tests/test_fuzz.py)
 .hypothesis/
+# complexipy cache (make complexity)
+.complexipy_cache/
