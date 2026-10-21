@@ -12,7 +12,9 @@ explains its structure, versions and how it replaces MT101.
 
 readme
 api
-benchmarks
+BENCHMARKS
+COMPARISON
+POLICIES
 adr/index
 changelog
 ```
