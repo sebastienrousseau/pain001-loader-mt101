@@ -17,9 +17,10 @@ import argparse
 import json
 import sys
 from pathlib import Path
+from typing import Any
 
 
-def score(stats: dict) -> tuple[float, int, int]:
+def score(stats: dict[str, Any]) -> tuple[float, int, int]:
     """Return (percent killed of checked, killed, checked)."""
     killed = int(stats.get("killed", 0))
     survived = int(stats.get("survived", 0))
