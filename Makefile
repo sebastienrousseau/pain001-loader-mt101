@@ -76,7 +76,7 @@ fuzz: ## Atheris for FUZZ_SECONDS (default 60); Linux x86_64, needs requirements
 demo: ## Re-render .github/demo.gif from .github/demo.tape (needs vhs).
 	vhs .github/demo.tape
 
-check: lint typecheck complexity test docstrings examples ## Run every gate CI runs on a pull request.
+check: lint typecheck complexity verify-versions test docstrings examples ## Run every gate CI runs on a pull request.
 
 clean: ## Remove caches and build artefacts.
 	rm -rf .pytest_cache .mypy_cache .ruff_cache .coverage build dist *.egg-info
