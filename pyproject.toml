@@ -32,7 +32,7 @@ classifiers = [
 ]
 
 dependencies = [
-    "pain001 >= 0.0.55, < 1",
+    "pain001 >= 0.0.74, < 1",
 ]
 
 [project.optional-dependencies]

@@ -5,7 +5,7 @@
 # unconditional so mypy can resolve the 3.10 branch of
 # scripts/check_suite_consistency.py from any interpreter.
 # Regenerate with: make pip-compile
-pain001>=0.0.55,<1
+pain001>=0.0.74,<1
 ruff==0.17.1
 mypy>=1.11,<3
 tomli>=2

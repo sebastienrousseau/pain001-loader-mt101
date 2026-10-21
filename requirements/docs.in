@@ -3,7 +3,7 @@
 # Sphinx toolchain for docs.yml. The package installs with --no-deps on
 # top, so autodoc imports the real code and its pain001 dependency.
 # Regenerate with: make pip-compile
-pain001>=0.0.55,<1
+pain001>=0.0.74,<1
 sphinx>=7
 furo>=2024
 myst-parser>=3

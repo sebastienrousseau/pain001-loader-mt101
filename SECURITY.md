@@ -39,7 +39,7 @@ outside that grammar is rejected with a `ValueError` or omitted.
 | **Catastrophic regex backtracking** | Field regexes are anchored (`^`, `$`) with bounded quantifiers (`\d{6}`, `[A-Z]{3}`). No nested unbounded groups. |
 | **Path traversal** | The loader never touches the filesystem. Callers pass strings, not paths. |
 | **Resource exhaustion** | Parsing is O(input size). Impose an upstream byte cap for hostile input. |
-| **Dependency CVEs** | `pain001 >= 0.0.55, < 1` is the only runtime dependency. |
+| **Dependency CVEs** | `pain001 >= 0.0.74, < 1` is the only runtime dependency. |
 
 ### Cryptography status
 
