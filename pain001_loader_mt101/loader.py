@@ -79,6 +79,7 @@ and a named beneficiary are treated as hard requirements that raise
 
 from __future__ import annotations
 
+import datetime
 import re
 from collections.abc import Iterator
 from typing import Any
@@ -271,12 +272,24 @@ def _parse_date(yymmdd: str) -> str:
     """Format a 6-char ``YYMMDD`` date as an ISO ``YYYY-MM-DD`` date.
 
     Years use the SWIFT sliding window: 00-79 -> 20YY, 80-99 -> 19YY.
+
+    Raises:
+        ValueError: If the value is not six digits, or names a date that
+            does not exist (``000000``, 30 February, 29 February in a
+            common year).
     """
     if not _DATE_RE.match(yymmdd):
         raise ValueError(f"Malformed :30: requested execution date {yymmdd!r}")
     year = int(yymmdd[0:2])
     century = 2000 if year < 80 else 1900
-    return f"{century + year:04d}-{yymmdd[2:4]}-{yymmdd[4:6]}"
+    try:
+        return datetime.date(
+            century + year, int(yymmdd[2:4]), int(yymmdd[4:6])
+        ).isoformat()
+    except ValueError as exc:
+        raise ValueError(
+            f"Malformed :30: requested execution date {yymmdd!r}: {exc}"
+        ) from None
 
 
 def _parse_f32b(value: str) -> tuple[str, float]:
