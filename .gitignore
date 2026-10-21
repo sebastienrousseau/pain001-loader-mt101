@@ -23,3 +23,6 @@ mutants/
 # Sphinx build
 docs/_build/
 uv.lock
+
+# Hypothesis example database (tests/test_fuzz.py)
+.hypothesis/
