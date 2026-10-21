@@ -122,7 +122,13 @@ _BENEFICIARY_TAGS = ("59", "59A", "59F")
 _FIELD_HEAD_RE = re.compile(r"^:(\d{2}[A-Z]?):", re.MULTILINE)
 
 # :32B:EUR1234,56  ->  CCY (3 alpha) | amount (comma-decimal). No value date.
-_F32B_RE = re.compile(r"^(?P<ccy>[A-Z]{3})(?P<amt>[\d.,]+)$")
+# A SWIFT amount is at least one digit with at most one decimal comma and
+# never a dot: "1.234" is a thousands separator or a foreign decimal point,
+# and reading it either way would be a guess about someone's money.
+_F32B_RE = re.compile(r"^(?P<ccy>[A-Z]{3})(?P<amt>\d+(?:,\d*)?)$")
+
+# SWIFT amounts are 15d: at most 15 characters, the decimal comma included.
+_AMOUNT_MAX_LEN = 15
 
 # :30: requested execution date is exactly six digits (YYMMDD).
 _DATE_RE = re.compile(r"^\d{6}$")
@@ -293,9 +299,15 @@ def _parse_date(yymmdd: str) -> str:
 
 
 def _parse_f32b(value: str) -> tuple[str, float]:
-    """Parse ``:32B:`` into (currency, amount)."""
+    """Parse ``:32B:`` into (currency, amount).
+
+    Raises:
+        ValueError: If the value is not a currency code followed by a SWIFT
+            amount (digits, at most one decimal comma, 15 characters at
+            most).
+    """
     match = _F32B_RE.match(value.replace("\n", "").strip())
-    if not match:
+    if not match or len(match.group("amt")) > _AMOUNT_MAX_LEN:
         raise ValueError(f"Malformed :32B: currency/amount {value!r}")
     return match.group("ccy"), _parse_amount(match.group("amt"))
 
