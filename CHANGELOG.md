@@ -51,7 +51,17 @@ else is supply chain, CI and documentation.
   ceilings against `complexity-baseline.json` (empty: `parse_mt101` and
   `_parse_transaction` were split under the 60-line ceiling, with no
   change in output), Atheris fuzzing (`fuzz/`) and Hypothesis fuzzing in
-  the test suite, mypy `--strict` over `scripts/`.
+  the test suite, mypy `--strict` over `scripts/`, and
+  `scripts/verify_versions.py` ("Version sources agree"), which fails
+  when any restatement of the version, or the `pain001` floor, differs
+  from `pyproject.toml`.
+- The README follows the family template, with a demo
+  (`.github/demo.gif`, rendered by `make demo`), and its License section
+  now states the dual `Apache-2.0 OR MIT` grant instead of Apache-2.0
+  alone. New `docs/COMPARISON.md` and `docs/POLICIES.md`;
+  `docs/benchmarks.md` is now `docs/BENCHMARKS.md` with a fresh run.
+- Every page of the documentation site links the author from its
+  copyright line.
 - Since 0.0.72 on `main`: the sequence-B override test uses a mod-97
   valid IBAN and real BICs, every SPDX header states `Apache-2.0 OR MIT`,
   `make format` and `make lint` run ruff as CI does, and seven GitHub
