@@ -247,6 +247,29 @@ def test_malformed_execution_date_raises() -> None:
         parse_mt101(mt101)
 
 
+@pytest.mark.parametrize(
+    "yymmdd",
+    ["000000", "261301", "260001", "260230", "250229", "260431", "260700"],
+    ids=["zero", "month-13", "month-0", "feb-30", "feb-29-2025", "apr-31", "day-0"],
+)
+def test_execution_date_that_does_not_exist_raises(yymmdd: str) -> None:
+    """Six digits are not enough: a :30: date that does not exist is refused.
+
+    ``000000`` used to come back as ``2000-00-00`` and ``260230`` as
+    ``2026-02-30``, a requested execution date no bank can honour.
+    """
+    mt101 = _single_mt101().replace(":30:260712", f":30:{yymmdd}")
+    with pytest.raises(ValueError, match=":30:"):
+        parse_mt101(mt101)
+
+
+def test_leap_day_execution_date_is_accepted() -> None:
+    """29 February exists in a leap year, so it parses."""
+    mt101 = _single_mt101().replace(":30:260712", ":30:280229")
+    (record,) = parse_mt101(mt101)
+    assert record["requested_execution_date"] == "2028-02-29"
+
+
 def test_50k_name_extraction_skips_account_line() -> None:
     """:50K: name extraction returns the name, not the leading /account."""
     (record,) = parse_mt101(_single_mt101())
@@ -506,6 +529,39 @@ def test_malformed_amount_raises() -> None:
     )
     with pytest.raises(ValueError, match=":32B:"):
         parse_mt101(mt101)
+
+
+@pytest.mark.parametrize(
+    "amount",
+    ["1.234", "1000.50", "1,2,3", "1.234,56", ",50", ",", "9" * 400, "1" * 16],
+    ids=[
+        "dot-thousands",
+        "dot-decimal",
+        "two-commas",
+        "dot-and-comma",
+        "no-integer-digit",
+        "bare-comma",
+        "overflows-float",
+        "longer-than-15",
+    ],
+)
+def test_amount_outside_the_swift_format_raises(amount: str) -> None:
+    """A :32B: amount is digits with at most one decimal comma, 15 at most.
+
+    ``1.234`` used to be read as 1.234 (a thousands separator taken for a
+    decimal point), ``1,2,3`` raised a float error that named no field,
+    and 400 nines became an infinite amount.
+    """
+    mt101 = _single_mt101().replace(":32B:EUR12345,67", f":32B:EUR{amount}")
+    with pytest.raises(ValueError, match=":32B:"):
+        parse_mt101(mt101)
+
+
+def test_fifteen_character_amount_is_accepted() -> None:
+    """The SWIFT maximum, comma included, still parses."""
+    mt101 = _single_mt101().replace(":32B:EUR12345,67", ":32B:EUR123456789012,34")
+    (record,) = parse_mt101(mt101)
+    assert record["payment_amount"] == 123456789012.34
 
 
 def test_missing_beneficiary_raises() -> None:

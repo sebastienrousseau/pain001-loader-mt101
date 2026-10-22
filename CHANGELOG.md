@@ -11,6 +11,62 @@ suite; the `0.0.1` release targets the `0.0.53` line of `pain001`.
 
 Nothing yet.
 
+## [0.0.74] - 2026-10-21
+
+Released in lockstep with `pain001` 0.0.74, the family's convergence
+release (this package skips 0.0.73, which `pain001-mcp` published
+alone). Two parser fixes change what `parse_mt101` accepts; everything
+else is supply chain, CI and documentation.
+
+### Fixed
+
+- `:30:` dates that do not exist are rejected with a `ValueError` naming
+  `:30:`. `000000` used to come back as `2000-00-00` and `260230` as
+  `2026-02-30`.
+- `:32B:` amounts outside the SWIFT form are rejected with a
+  `ValueError` naming `:32B:`. **Behaviour change:** an amount with a
+  dot (`EUR1.234`, `EUR1000.50`) used to be read as a decimal point and
+  is now refused, because SWIFT amounts never carry one; `1,2,3` and a
+  bare `,` now raise the documented error instead of float's own; an
+  amount over 15 characters (SWIFT `15d`), which could become an
+  infinite amount, is refused.
+- `scripts/check_suite_consistency.py` compares the tree with this
+  package's own release on PyPI instead of the core's.
+- `examples/01_minimal_parse.py` no longer prints names, IBANs and BICs
+  (CodeQL `py/clear-text-logging-sensitive-data`); it lists the party
+  keys with their values redacted.
+- `CITATION.cff` states the licence as CFF 1.2.0 requires (`Apache-2.0`
+  and `MIT`, either at the user's option); the SPDX expression it held
+  did not validate.
+
+### Changed
+
+- `pain001 >= 0.0.74, < 1`, in `pyproject.toml` and every
+  `requirements/*.in`.
+- Every CI install is hash-pinned from `requirements/*.txt` (OpenSSF
+  Scorecard Pinned-Dependencies), and the release build runs with
+  `--no-isolation` from the pinned build tree. `certifi` is floored at
+  2026.10.19 (GHSA-6q48-6c7w-9gw2) in the tooling trees that resolve it.
+- New CI gates: `pip-audit` over every requirements file, complexity
+  ceilings against `complexity-baseline.json` (empty: `parse_mt101` and
+  `_parse_transaction` were split under the 60-line ceiling, with no
+  change in output), Atheris fuzzing (`fuzz/`) and Hypothesis fuzzing in
+  the test suite, mypy `--strict` over `scripts/`, and
+  `scripts/verify_versions.py` ("Version sources agree"), which fails
+  when any restatement of the version, or the `pain001` floor, differs
+  from `pyproject.toml`.
+- The README follows the family template, with a demo
+  (`.github/demo.gif`, rendered by `make demo`), and its License section
+  now states the dual `Apache-2.0 OR MIT` grant instead of Apache-2.0
+  alone. New `docs/COMPARISON.md` and `docs/POLICIES.md`;
+  `docs/benchmarks.md` is now `docs/BENCHMARKS.md` with a fresh run.
+- Every page of the documentation site links the author from its
+  copyright line.
+- Since 0.0.72 on `main`: the sequence-B override test uses a mod-97
+  valid IBAN and real BICs, every SPDX header states `Apache-2.0 OR MIT`,
+  `make format` and `make lint` run ruff as CI does, and seven GitHub
+  Actions were updated.
+
 ## [0.0.72] - 2026-09-28
 
 Aligns the `pain001` suite on `0.0.72`, the core's coordinated release:

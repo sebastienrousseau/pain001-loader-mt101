@@ -25,6 +25,7 @@ extensions = [
 myst_enable_extensions = ["colon_fence", "deflist"]
 myst_heading_anchors = 3
 source_suffix = {".rst": "restructuredtext", ".md": "markdown"}
+templates_path = ["_templates"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 # The README is included as a page: its repository-relative links,
 # diagram fences and heading levels are right for GitHub, not for Sphinx.
@@ -36,5 +37,9 @@ suppress_warnings = [
 intersphinx_mapping = {"python": ("https://docs.python.org/3", None)}
 html_theme = "furo"
 html_title = f"pain001-loader-mt101 {release}"
+# The footer's copyright line, with the author link, comes from
+# _templates/page.html; Furo's own line would repeat it unlinked.
+html_show_copyright = False
+html_context = {"author_year": "2026"}
 autodoc_member_order = "bysource"
 autodoc_typehints = "description"

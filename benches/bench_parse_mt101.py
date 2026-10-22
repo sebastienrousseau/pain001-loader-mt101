@@ -22,7 +22,7 @@ that silently stopped after the first instruction would show a falling
 ``us/txn`` as the input grew, which reads as batching and would be the
 opposite -- dividing by instructions never parsed. Watching the record
 count track the input is what rules that out. (Its sibling
-`pain001-loader-mt103` genuinely behaves that way, because an MT103
+`pacs008-loader-mt103` genuinely behaves that way, because an MT103
 carries exactly one transfer; the two loaders are easy to assume are
 alike.)
 
