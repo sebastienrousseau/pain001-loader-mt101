@@ -5,10 +5,13 @@
 
 from __future__ import annotations
 
+import time
+
 import pytest
 from pain001.validation.schema_validator import SchemaValidator
 
 from pain001_loader_mt101 import __version__, parse_mt101
+from pain001_loader_mt101.loader import _unwrap_block4
 
 # Target ISO 20022 message type for the flat records produced here.
 PAIN001_MESSAGE_TYPE = "pain.001.001.09"
@@ -464,6 +467,47 @@ def test_raw_block4_envelope_is_unwrapped() -> None:
     (record,) = parse_mt101(wrapped)
     assert record["id"] == "MSGREF001"
     assert record["charge_bearer"] == "SHAR"
+
+
+def test_unterminated_block4_openers_parse_in_linear_time() -> None:
+    """Many ``{4:`` with no ``-}`` must not cost quadratic time.
+
+    The envelope used to be found with a lazy regex search, which retried
+    from every ``{4:`` and scanned to the end each time: 60 KB of ``{4:``
+    took about 17 seconds and 120 KB about 110. Now it is one pass, so
+    the payload is rejected (it has no :20:) in well under a second.
+    """
+    hostile = "{4:" * 20_000
+    start = time.perf_counter()
+    with pytest.raises(ValueError, match=":20:"):
+        parse_mt101(hostile)
+    assert time.perf_counter() - start < 1.0
+
+
+@pytest.mark.parametrize(
+    ("payload", "body"),
+    [
+        ("{4:\n:20:A\n-}", "\n:20:A\n"),
+        ("x{4::20:A-}{4::20:B-}", ":20:A"),
+        ("{4:{4::20:A-}", "{4::20:A"),
+        ("{4::20:A\n-}\n-}", ":20:A\n"),
+        ("{4::20:A", "{4::20:A"),
+        (":20:A-}", ":20:A-}"),
+        ("-}{4::20:A", "-}{4::20:A"),
+    ],
+    ids=[
+        "plain",
+        "first-wins",
+        "nested-opener",
+        "first-closer",
+        "open",
+        "close",
+        "reversed",
+    ],
+)
+def test_block4_unwrapping_keeps_its_rules(payload: str, body: str) -> None:
+    """The first ``{4:`` up to the first ``-}`` after it, else the text as is."""
+    assert _unwrap_block4(payload) == body
 
 
 def test_missing_sender_reference_raises() -> None:

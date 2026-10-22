@@ -138,8 +138,8 @@ _BIC_RE = re.compile(r"^[A-Z0-9]{6}[A-Z0-9]{2}(?:[A-Z0-9]{3})?$")
 # Structured (option F) sub-field line, e.g. "1/JOHN DOE" -> number, text.
 _STRUCTURED_RE = re.compile(r"^(?P<num>\d)/(?P<text>.*)$")
 
-# The block-4 envelope of a raw SWIFT message: {4:\n...\n-}.
-_BLOCK4_RE = re.compile(r"\{4:(?P<body>.*?)-\}", re.DOTALL)
+# The block-4 envelope of a raw SWIFT message is {4:\n...\n-}. It is found
+# with str.find: a lazy regex search is quadratic on unterminated "{4:".
 
 
 # --- Tokeniser --------------------------------------------------------------
@@ -150,8 +150,9 @@ def _unwrap_block4(text: str) -> str:
 
     A bare tag list (the common representation) is returned unchanged.
     """
-    match = _BLOCK4_RE.search(text)
-    return match.group("body") if match else text
+    start = text.find("{4:")
+    end = text.find("-}", start + 3) if start >= 0 else -1
+    return text[start + 3 : end] if end >= 0 else text
 
 
 def _iter_fields(text: str) -> Iterator[tuple[str, str]]:

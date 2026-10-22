@@ -18,6 +18,16 @@ release (this package skips 0.0.73, which `pain001-mcp` published
 alone). Two parser fixes change what `parse_mt101` accepts; everything
 else is supply chain, CI and documentation.
 
+### Security
+
+- **An unterminated block-4 opener no longer costs quadratic time**
+  (CWE-1333). `parse_mt101` found the `{4:...-}` envelope with a lazy
+  regular expression, so each `{4:` without a closing `-}` made the
+  search scan to the end of the text again: 120 KB of `{4:` took about
+  110 seconds before the input was rejected. The envelope is now found
+  in one pass, with the same result on every input. Every release up to
+  0.0.72 is affected.
+
 ### Fixed
 
 - `:30:` dates that do not exist are rejected with a `ValueError` naming
