@@ -6,7 +6,7 @@
 # scripts/check_suite_consistency.py from any interpreter.
 # Regenerate with: make pip-compile
 pain001>=0.0.74,<1
-ruff==0.17.1
+ruff==0.17.2
 mypy>=1.11,<3
 tomli>=2
 # The complexity gate is type-checked with its own tools installed.
