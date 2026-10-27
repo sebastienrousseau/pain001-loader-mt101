@@ -69,7 +69,7 @@ pip install pain001-loader-mt101
 > suite on the pain001 0.0.75 floor, for Python 3.11+ (3.10 reaches end
 > of life in October 2026).
 
-The package pulls in [`pain001`][core] (0.0.74 or newer, below 1) and
+The package pulls in [`pain001`][core] (0.0.75 or newer, below 1) and
 nothing else. There is no command-line entry point: it is a library.
 
 ---
@@ -78,7 +78,7 @@ nothing else. There is no command-line entry point: it is a library.
 
 - Python 3.11 or newer, tested in CI on 3.11, 3.12, 3.13 and 3.14 on
   Linux ([toolchain policy](docs/POLICIES.md)).
-- `pain001` 0.0.74 or newer on the 0.x line.
+- `pain001` 0.0.75 or newer on the 0.x line.
 - Pure Python, so any platform CPython runs on; CI exercises Linux only.
 
 ---
