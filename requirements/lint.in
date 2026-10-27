@@ -1,13 +1,10 @@
 # SPDX-FileCopyrightText: 2026 Sebastien Rousseau <sebastian.rousseau@gmail.com>
 # SPDX-License-Identifier: Apache-2.0 OR MIT
 # Lint, format and type-check tooling for the CI "lint" job. pain001 is
-# included so mypy --strict resolves the real package. tomli is
-# unconditional so mypy can resolve the 3.10 branch of
-# scripts/check_suite_consistency.py from any interpreter.
+# included so mypy --strict resolves the real package.
 # Regenerate with: make pip-compile
 pain001>=0.0.74,<1
 ruff==0.17.2
 mypy>=1.11,<3
-tomli>=2
 # The complexity gate is type-checked with its own tools installed.
 -r complexity.in
