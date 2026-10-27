@@ -16,7 +16,7 @@
   <a href="https://sebastienrousseau.com/pain001-loader-mt101/"><img src="https://img.shields.io/badge/docs-sphinx-blue?style=for-the-badge&labelColor=555555&logo=readthedocs" alt="Docs" height="28" /></a>
   <a href="https://scorecard.dev/viewer/?uri=github.com/sebastienrousseau/pain001-loader-mt101"><img src="https://img.shields.io/ossf-scorecard/github.com/sebastienrousseau/pain001-loader-mt101?style=for-the-badge&label=OpenSSF%20Scorecard&logo=openssf" alt="OpenSSF Scorecard" height="28" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0%20OR%20MIT-blue.svg?style=for-the-badge" alt="License: Apache-2.0 OR MIT" height="28" /></a>
-  <a href="https://github.com/sebastienrousseau/pain001-loader-mt101/blob/main/docs/POLICIES.md"><img src="https://img.shields.io/badge/Python-3.10%2B-93450a.svg?style=for-the-badge&logo=python" alt="Python 3.10 or newer" height="28" /></a>
+  <a href="https://github.com/sebastienrousseau/pain001-loader-mt101/blob/main/docs/POLICIES.md"><img src="https://img.shields.io/badge/Python-3.11%2B-93450a.svg?style=for-the-badge&logo=python" alt="Python 3.11 or newer" height="28" /></a>
 </p>
 
 <p align="center">
@@ -65,20 +65,20 @@
 pip install pain001-loader-mt101
 ```
 
-> **Latest release: v0.0.74**: impossible `:30:` dates and `:32B:`
-> amounts outside the SWIFT form are rejected, released in lockstep with
-> the pain001 suite, for Python 3.10+.
+> **Latest release: v0.0.75**: released in lockstep with the pain001
+> suite on the pain001 0.0.75 floor, for Python 3.11+ (3.10 reaches end
+> of life in October 2026).
 
-The package pulls in [`pain001`][core] (0.0.74 or newer, below 1) and
+The package pulls in [`pain001`][core] (0.0.75 or newer, below 1) and
 nothing else. There is no command-line entry point: it is a library.
 
 ---
 
 ## Requirements
 
-- Python 3.10 or newer, tested in CI on 3.10, 3.11, 3.12, 3.13 and 3.14 on
+- Python 3.11 or newer, tested in CI on 3.11, 3.12, 3.13 and 3.14 on
   Linux ([toolchain policy](docs/POLICIES.md)).
-- `pain001` 0.0.74 or newer on the 0.x line.
+- `pain001` 0.0.75 or newer on the 0.x line.
 - Pure Python, so any platform CPython runs on; CI exercises Linux only.
 
 ---
