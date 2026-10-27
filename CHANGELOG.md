@@ -36,6 +36,13 @@ and clears an advised filelock from the audit tree.
   are gone, and `make pip-compile` compiles for 3.11 (only the packages
   for 3.10 leave). pip keeps 3.10 users on pain001-loader-mt101 0.0.74.
 
+### Fixed
+
+- The GitHub release that `release.yml` creates is titled
+  `pain001-loader-mt101 X.Y.Z`, as the suite's release invariants
+  require. `action-gh-release` was given no name, so it used the bare
+  tag (`v0.0.74`), which was corrected by hand after publishing.
+
 ### Changed
 
 - ruff 0.17.2 in the lint tree (Dependabot #30) and the GitHub Actions

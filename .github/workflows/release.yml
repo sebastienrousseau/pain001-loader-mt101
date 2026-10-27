@@ -118,8 +118,10 @@ jobs:
           path: signatures/
 
       - name: Release notes (releases/v<version>.md, else the CHANGELOG section)
+        id: notes
         run: |
           VERSION="${GITHUB_REF_NAME#v}"
+          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
           if [ -f "releases/v${VERSION}.md" ]; then
             cp "releases/v${VERSION}.md" release_notes.md
           else
@@ -130,9 +132,13 @@ jobs:
             exit 1
           fi
 
+      # The release is titled "pain001-loader-mt101 X.Y.Z" (no leading v),
+      # as the suite's release invariants require; the action's default
+      # title is the bare tag.
       - name: Create GitHub release
         uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64 # v3.0.3
         with:
+          name: pain001-loader-mt101 ${{ steps.notes.outputs.version }}
           body_path: release_notes.md
           files: |
             dist/*
