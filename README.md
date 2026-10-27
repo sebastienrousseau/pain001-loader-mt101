@@ -65,9 +65,9 @@
 pip install pain001-loader-mt101
 ```
 
-> **Latest release: v0.0.74**: impossible `:30:` dates and `:32B:`
-> amounts outside the SWIFT form are rejected, released in lockstep with
-> the pain001 suite, for Python 3.10+.
+> **Latest release: v0.0.75**: released in lockstep with the pain001
+> suite on the pain001 0.0.75 floor, for Python 3.11+ (3.10 reaches end
+> of life in October 2026).
 
 The package pulls in [`pain001`][core] (0.0.74 or newer, below 1) and
 nothing else. There is no command-line entry point: it is a library.

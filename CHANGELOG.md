@@ -9,6 +9,14 @@ suite; the `0.0.1` release targets the `0.0.53` line of `pain001`.
 
 ## [Unreleased]
 
+Nothing yet.
+
+## [0.0.75] - 2026-10-27
+
+Released in lockstep with `pain001` 0.0.75. The parser is unchanged:
+this release moves the Python floor to 3.11 with the rest of the suite
+and clears an advised filelock from the audit tree.
+
 ### Security
 
 - `requirements/audit.txt` pinned filelock 4.1.0 for Python 3.10
@@ -27,6 +35,11 @@ suite; the `0.0.1` release targets the `0.0.53` line of `pain001`.
   backport and the 3.10 branch in `scripts/check_suite_consistency.py`
   are gone, and `make pip-compile` compiles for 3.11 (only the packages
   for 3.10 leave). pip keeps 3.10 users on pain001-loader-mt101 0.0.74.
+
+### Changed
+
+- ruff 0.17.2 in the lint tree (Dependabot #30) and the GitHub Actions
+  group's five updates (#31).
 
 ## [0.0.74] - 2026-10-21
 
