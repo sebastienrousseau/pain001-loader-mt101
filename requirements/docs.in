@@ -8,4 +8,4 @@ sphinx>=7
 furo>=2024
 myst-parser>=3
 # GHSA-6q48-6c7w-9gw2: no affected certifi may resolve (via requests).
-certifi>=2026.10.19
+certifi>=2026.10.23
