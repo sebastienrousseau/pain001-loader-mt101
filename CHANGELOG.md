@@ -11,16 +11,17 @@ suite; the `0.0.1` release targets the `0.0.53` line of `pain001`.
 
 Nothing yet.
 
-## [0.0.76] - 2026-11-05
+## [0.0.77] - 2026-11-06
 
-Released in lockstep with `pain001` 0.0.76. The parser is unchanged:
-this release moves the `pain001` floor to 0.0.76, as the suite's
+Released in lockstep with `pain001` 0.0.77. The parser is unchanged:
+this release moves the `pain001` floor to 0.0.77, as the suite's
 lockstep policy requires, and carries the dependency updates merged
-since 0.0.75.
+since 0.0.75. 0.0.76 was prepared on 2026-11-05 but never tagged or
+published, so its changes ship here.
 
 ### Changed
 
-- Requires `pain001 >= 0.0.76, < 1` (`pyproject.toml` and the
+- Requires `pain001 >= 0.0.77, < 1` (`pyproject.toml` and the
   `runtime`, `test`, `docs` and `lint` requirement sets).
 - Development and CI tools: hatchling 1.33.0, pytest 9.2.0,
   pytest-benchmark 5.3.1, hypothesis 6.170.13, mypy 2.4.1, ruff 0.17.3,
