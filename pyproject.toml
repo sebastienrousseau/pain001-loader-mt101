@@ -1,6 +1,6 @@
 [project]
 name = "pain001-loader-mt101"
-version = "0.0.78"
+version = "0.0.79"
 description = "Convert legacy SWIFT MT101 requests for transfer to ISO 20022 pain.001 flat records."
 readme = "README.md"
 requires-python = ">=3.11"
@@ -31,7 +31,7 @@ classifiers = [
 ]
 
 dependencies = [
-    "pain001 >= 0.0.78, < 1",
+    "pain001 >= 0.0.79, < 1",
 ]
 
 [project.optional-dependencies]
@@ -124,7 +124,7 @@ ignore_missing_imports = true
 # the suite conformance file are excluded from the selection because
 # they do not test loader logic and dominate runtime.
 source_paths = ["pain001_loader_mt101"]
-also_copy = ["examples"]
+also_copy = ["examples", "releases", "CHANGELOG.md"]
 pytest_add_cli_args = ["-q", "-p", "no:cacheprovider", "--no-cov", "--benchmark-disable"]
 pytest_add_cli_args_test_selection = [
     "tests/test_loader.py",
