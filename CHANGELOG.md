@@ -11,6 +11,19 @@ suite; the `0.0.1` release targets the `0.0.53` line of `pain001`.
 
 Nothing yet.
 
+## [0.0.78] - 2026-11-07
+
+Released in lockstep with `pain001` 0.0.78, which adds faces
+(projections of a pain.001 document into UK Open Banking, Berlin Group
+and ISO 20022 element names). The parser is unchanged: this release
+moves the `pain001` floor to 0.0.78, as the suite's lockstep policy
+requires.
+
+### Changed
+
+- Requires `pain001 >= 0.0.78, < 1` (`pyproject.toml` and the
+  `runtime`, `test`, `docs` and `lint` requirement sets).
+
 ## [0.0.77] - 2026-11-06
 
 Released in lockstep with `pain001` 0.0.77. The parser is unchanged:
