@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 This package's version follows the [`pain001`](https://github.com/sebastienrousseau/pain001)
 suite; the `0.0.1` release targets the `0.0.53` line of `pain001`.
 
+## [0.0.80] - 2026-11-07
+
+Released in lockstep with `pain001` 0.0.80, a security release of the
+core's REST API
+([GHSA-vv3x-jpvc-w468](https://github.com/sebastienrousseau/pain001/security/advisories/GHSA-vv3x-jpvc-w468)).
+Nothing in this loader changed beyond the version and the `pain001`
+floor.
+
+### Changed
+
+- Requires `pain001 >= 0.0.80, < 1` (`pyproject.toml` and the
+  `runtime`, `test`, `docs` and `lint` requirement sets; every
+  requirement file that pins `pain001` regenerated with the command in
+  its header).
+
 ## [0.0.79] - 2026-11-07
 
 Released in lockstep with `pain001` 0.0.79. The parser is unchanged:
