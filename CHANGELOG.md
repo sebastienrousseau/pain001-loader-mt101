@@ -7,9 +7,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 This package's version follows the [`pain001`](https://github.com/sebastienrousseau/pain001)
 suite; the `0.0.1` release targets the `0.0.53` line of `pain001`.
 
-## [Unreleased]
+## [0.0.79] - 2026-11-07
 
-Nothing yet.
+Released in lockstep with `pain001` 0.0.79. The parser is unchanged:
+this release moves the `pain001` floor to 0.0.79, as the suite's
+lockstep policy requires, and changes how the release page is written.
+
+### Changed
+
+- Requires `pain001 >= 0.0.79, < 1` (`pyproject.toml` and the
+  `runtime`, `test`, `docs` and `lint` requirement sets; every
+  requirement file that pins `pain001` regenerated with the command in
+  its header).
+- The release page is written by the release workflow in the suite's
+  shape. A last `release-notes` job runs `scripts/release_notes.py
+  publish` once every asset is attached: the title is `pain001-loader-mt101 X.Y.Z`,
+  the Highlights come from `releases/vX.Y.Z.md`, What's Changed lists
+  the pull requests merged since the previous release, and Checksums
+  gives the SHA-256 of every asset. The 0.0.77 and 0.0.78 pages had to
+  be rewritten by hand.
+- `tests/test_release_notes.py` fails a pull request whose CHANGELOG
+  dates the version while `releases/vX.Y.Z.md` is missing or has other
+  than 2 to 4 highlights. Both files are vendored byte-identical from
+  `pain001`.
+- Mutation testing copies `releases/` and `CHANGELOG.md` into its
+  sandbox, so the release-note check finds its inputs there if the
+  mutation test selection ever includes it.
 
 ## [0.0.78] - 2026-11-07
 
