@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 This package's version follows the [`pain001`](https://github.com/sebastienrousseau/pain001)
 suite; the `0.0.1` release targets the `0.0.53` line of `pain001`.
 
+## [0.0.81] - 2026-11-08
+
+Released in lockstep with [pain001 0.0.81](https://github.com/sebastienrousseau/pain001/releases/tag/v0.0.81). Nothing in this loader changed
+beyond the version and the `pain001` floor. In 0.0.81 the core checks
+every IBAN and BIC and refuses rows that mix payment batches when it
+loads them, so rows this loader returns are checked the same way as a
+CSV file's.
+
+### Changed
+
+- Requires `pain001 >= 0.0.81, < 1` (`pyproject.toml` and the
+  `runtime`, `test`, `docs` and `lint` requirement sets; every
+  requirement file that pins `pain001` regenerated with the command in
+  its header).
+
 ## [0.0.80] - 2026-11-07
 
 Released in lockstep with `pain001` 0.0.80, a security release of the
