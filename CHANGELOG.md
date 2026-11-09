@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 This package's version follows the [`pain001`](https://github.com/sebastienrousseau/pain001)
 suite; the `0.0.1` release targets the `0.0.53` line of `pain001`.
 
+## [0.0.83] - 2026-11-09
+
+Released in lockstep with [pain001 0.0.83](https://github.com/sebastienrousseau/pain001/releases/tag/v0.0.83). Nothing in this loader changed
+beyond the version and the `pain001` floor. The pain.001.001.09 the
+core writes from these records is the same as with 0.0.82; the core's
+changes in 0.0.83 are to XML signing and signature verification, which
+this loader does not use.
+
+### Changed
+
+- Requires `pain001 >= 0.0.83, < 1` (`pyproject.toml` and the
+  `runtime`, `test`, `docs` and `lint` requirement sets; every
+  requirement file that pins `pain001` regenerated with the command in
+  its header).
+
 ## [0.0.82] - 2026-11-09
 
 Released in lockstep with [pain001 0.0.82](https://github.com/sebastienrousseau/pain001/releases/tag/v0.0.82). Nothing in this loader changed
