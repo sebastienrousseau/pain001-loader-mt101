@@ -573,9 +573,9 @@ mypy-extensions==1.1.0 \
     --hash=sha256:1be4cccdb0f2482337c4743e60421de3a356cd97508abadd57d47403e94f5505 \
     --hash=sha256:52e68efc3284861e772bbcd66823fde5ae21fd2fdb51c62a211403730b916558
     # via mypy
-pain001==0.0.81 \
-    --hash=sha256:c316bda7f50aba094bc37696c2ab43e9a76f94baaa257eab79497453f23d68d7 \
-    --hash=sha256:cfac838349a10e1dd647c312bcb72187b2fcaf03f2184a015db4c54e0210bf2a
+pain001==0.0.82 \
+    --hash=sha256:599ce60fe84ed9d660ba159b4df014cd17a0ca576b45b26e9e91c04eac108dba \
+    --hash=sha256:6cf16395a9b94a327d336f71d08d38bfdb7586af3d8b99d4550015b8b8abd014
     # via -r requirements/lint.in
 pathspec==1.1.1 \
     --hash=sha256:17db5ecd524104a120e173814c90367a96a98d07c45b2e10c2f3919fff91bf5a \

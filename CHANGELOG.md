@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 This package's version follows the [`pain001`](https://github.com/sebastienrousseau/pain001)
 suite; the `0.0.1` release targets the `0.0.53` line of `pain001`.
 
+## [0.0.82] - 2026-11-09
+
+Released in lockstep with [pain001 0.0.82](https://github.com/sebastienrousseau/pain001/releases/tag/v0.0.82). Nothing in this loader changed
+beyond the version and the `pain001` floor. The pain.001.001.09 the
+core writes from these records is the same as with 0.0.81. If you add
+the columns pain.001.001.04 to .08 need and render one of those, the
+core now writes the default `service_level_code="SEPA"` there too.
+
+### Changed
+
+- Requires `pain001 >= 0.0.82, < 1` (`pyproject.toml` and the
+  `runtime`, `test`, `docs` and `lint` requirement sets; every
+  requirement file that pins `pain001` regenerated with the command in
+  its header).
+- Development tools: ruff 0.17.4, filelock 4.2.9 and hypothesis
+  6.170.14 (Dependabot #49, #50 and #51).
+
 ## [0.0.81] - 2026-11-08
 
 Released in lockstep with [pain001 0.0.81](https://github.com/sebastienrousseau/pain001/releases/tag/v0.0.81). Nothing in this loader changed
