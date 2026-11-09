@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 This package's version follows the [`pain001`](https://github.com/sebastienrousseau/pain001)
 suite; the `0.0.1` release targets the `0.0.53` line of `pain001`.
 
+## [Unreleased]
+
+### Added
+
+- Audit all nine suite repositories and their publication channels daily and after publishing workflows, using the shared checker pinned to a core commit.
+
 ## [0.0.83] - 2026-11-09
 
 Released in lockstep with [pain001 0.0.83](https://github.com/sebastienrousseau/pain001/releases/tag/v0.0.83). Nothing in this loader changed
