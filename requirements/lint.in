@@ -4,7 +4,7 @@
 # included so mypy --strict resolves the real package.
 # Regenerate with: make pip-compile
 pain001>=0.0.81,<1
-ruff==0.17.3
+ruff==0.17.4
 mypy>=1.11,<3
 # The complexity gate is type-checked with its own tools installed.
 -r complexity.in
