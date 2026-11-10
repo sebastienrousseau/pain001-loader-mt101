@@ -7,9 +7,11 @@ help, by need.
 
 ## Read first
 
-- **[README.md](README.md)** — install, quick start, the full MT101 →
+- **[README.md](README.md)**: install, quick start, the full MT101 to
   pain.001 field-mapping table, assumptions and out-of-scope fields.
-- **[`examples/`](examples/)** — two runnable scripts exercised in CI.
+- **[`examples/`](examples/)**: two runnable scripts exercised in CI.
+- **[DEVELOPMENT.md](DEVELOPMENT.md)**: building, testing and every CI
+  gate, run locally.
 
 ## Questions & how-to
 

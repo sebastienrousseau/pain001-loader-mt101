@@ -19,7 +19,18 @@ security fixes; older `0.0.x` versions do not.
 Private Vulnerability Reporting:
 <https://github.com/sebastienrousseau/pain001-loader-mt101/security/advisories/new>
 
-**Acknowledgement**: within 48 hours. **Triage**: within 7 days.
+Please include a description and its impact, a minimal MT101 input that
+reproduces it (synthetic values only), and the affected version
+(`python -c "import pain001_loader_mt101; print(pain001_loader_mt101.__version__)"`).
+
+These are goals, not guarantees: the pain001 suite is maintained in a
+personal capacity, with no SLA and no out-of-hours cover.
+
+**Acknowledgement**: the goal is within 5 working days.
+**Triage**: a severity assessment and remediation plan after
+acknowledgement.
+**Fix windows** (best effort): critical 7 days, high 30 days, medium 60
+days, low best-effort. The clock starts at triage, not at report.
 
 ## Security posture
 

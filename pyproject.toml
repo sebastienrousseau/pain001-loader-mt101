@@ -103,6 +103,13 @@ source = ["pain001_loader_mt101", "scripts"]
 exclude_lines = ["pragma: no cover", "raise NotImplementedError"]
 show_missing = true
 
+[tool.codespell]
+# Spelling gate for the docs-lint job and the pre-commit hook. Skips
+# caches, build output, hash-pinned requirements and the fuzz corpus,
+# whose inputs are malformed on purpose.
+skip = "./.git,./.venv,./.mypy_cache,./.ruff_cache,./.pytest_cache,./.hypothesis,./.complexipy_cache,./.benchmarks,./docs/_build,./mutants,./requirements/*.txt,./fuzz/corpus,*.gif,./.coverage,./coverage.xml"
+quiet-level = 3
+
 [tool.interrogate]
 fail-under = 100
 ignore-init-module = true

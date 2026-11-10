@@ -1,8 +1,9 @@
 # SPDX-License-Identifier: Apache-2.0 OR MIT
 #
-# Markdown style on every push and pull request (markdownlint-cli2,
-# configured in .markdownlint-cli2.jsonc). Run it locally with
-# `npx markdownlint-cli2@0.23.3 "**/*.md"`.
+# Cheap documentation lint on every push and pull request: spelling
+# across the tree (codespell, configured in pyproject.toml) and Markdown
+# style (markdownlint-cli2, configured in .markdownlint-cli2.jsonc).
+# Run both locally with `make docs-lint`.
 name: Docs lint
 
 on:
@@ -16,6 +17,7 @@ permissions:
 
 jobs:
   markdownlint:
+    # The job id stays `markdownlint` so a required check keeps its name.
     name: markdownlint
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -23,6 +25,15 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+
+      - name: Spelling (codespell, hash-pinned)
+        run: |
+          pip install --require-hashes -r requirements/docs-lint.txt
+          codespell
 
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:

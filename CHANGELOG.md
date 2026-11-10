@@ -20,6 +20,22 @@ suite; the `0.0.1` release targets the `0.0.53` line of `pain001`.
 - Hold `scripts/` to the same 100% line and branch coverage floor as the
   package, with tests for the mutation gate, the complexity gate's
   duplicate-name path and each script's command-line entry point.
+- Add DEVELOPMENT.md (toolchain, every CI gate and its local command,
+  test layout, the coverage rationale, the release model), included in
+  the manual with ARCHITECTURE.md; `.editorconfig`; a
+  `.pre-commit-config.yaml` with every hook pinned by commit SHA; a
+  devcontainer that runs `make install && make check`; and codespell in
+  the docs-lint job, hash-pinned in `requirements/docs-lint.txt`, with
+  `make docs-lint` to run it and markdownlint locally.
+
+### Changed
+
+- SECURITY.md states the suite's response goals as the core does (no
+  SLA; acknowledgement goal within 5 working days) instead of a 48-hour
+  acknowledgement and 7-day triage the core does not commit to.
+- CONTRIBUTING.md drops instructions that no longer matched the tree (a
+  `test_stress.py` that does not exist, a 32-repository suite, a
+  two-file version bump) and points to DEVELOPMENT.md.
 
 ### Removed
 

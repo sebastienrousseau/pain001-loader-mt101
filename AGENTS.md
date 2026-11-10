@@ -6,7 +6,8 @@
 messages into the flat records the `pain001` suite validates and turns
 into ISO 20022 pain.001, one record per transaction, and nothing else.
 These are the rules an automated change is most likely to break; humans
-follow them too. Read [CONTRIBUTING.md](CONTRIBUTING.md) first.
+follow them too. Read [CONTRIBUTING.md](CONTRIBUTING.md) and
+[DEVELOPMENT.md](DEVELOPMENT.md) first.
 
 ## Versioning
 
