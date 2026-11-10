@@ -49,4 +49,4 @@ disclosure process in [SECURITY.md](SECURITY.md).
 | :--- | :--- |
 | 0.0.85 (latest) | ✅ |
 
-Requires Python 3.11+ and `pain001 >= 0.0.84`.
+Requires Python 3.11+ and `pain001 >= 0.0.85`.
