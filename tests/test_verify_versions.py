@@ -9,6 +9,7 @@ moved off the version, so each check is seen to catch its own drift.
 from __future__ import annotations
 
 import importlib.util
+import runpy
 import shutil
 from pathlib import Path
 from types import ModuleType
@@ -160,3 +161,31 @@ def test_a_missing_pain001_floor_fails(tree: Path) -> None:
     v = _version(tree)
     _rewrite(tree / "pyproject.toml", f'"pain001 >= {v}, < 1"', '"pain001"')
     assert _script().problems(tree) == ["pyproject.toml: no pain001>= floor"]
+
+
+def test_a_pyproject_without_a_version_stops_the_check(tree: Path) -> None:
+    _rewrite(tree / "pyproject.toml", f'version = "{_version(tree)}"', "")
+    with pytest.raises(SystemExit, match="no version field"):
+        _script().problems(tree)
+
+
+def test_main_reports_each_problem_and_fails(
+    tree: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    v = _version(tree)
+    _rewrite(tree / "CITATION.cff", v, "0.0.1")
+    script = _script()
+    monkeypatch.setattr(script, "ROOT", tree)
+    assert script.main() == 1
+    assert "ERROR: CITATION.cff: version is 0.0.1" in capsys.readouterr().out
+
+
+def test_the_script_runs_as_a_command(capsys: pytest.CaptureFixture[str]) -> None:
+    with pytest.raises(SystemExit) as stopped:
+        runpy.run_path(
+            str(ROOT / "scripts" / "verify_versions.py"), run_name="__main__"
+        )
+    assert stopped.value.code == 0
+    assert "OK: every version source agrees" in capsys.readouterr().out

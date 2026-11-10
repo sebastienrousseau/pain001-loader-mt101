@@ -15,6 +15,18 @@ suite; the `0.0.1` release targets the `0.0.53` line of `pain001`.
   suite's shared text), issue forms, a pull request template, AGENTS.md
   and a markdownlint CI job (`docs-lint.yml`, configured in
   `.markdownlint-cli2.jsonc`); fix the Markdown it flagged.
+- Run every example from the test suite (`tests/test_examples.py`), so
+  each leg of the Python matrix proves they still work.
+- Hold `scripts/` to the same 100% line and branch coverage floor as the
+  package, with tests for the mutation gate, the complexity gate's
+  duplicate-name path and each script's command-line entry point.
+
+### Removed
+
+- `scripts/check_suite_consistency.py` and its test. No workflow ran it
+  since the daily Suite Consistency job moved to the core's shared
+  checker in 0.0.84, and its member list named five of the nine suite
+  repositories.
 
 ## [0.0.85] - 2026-11-10
 

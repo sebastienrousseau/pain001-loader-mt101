@@ -6,6 +6,8 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import runpy
+import sys
 from pathlib import Path
 from types import ModuleType
 
@@ -151,3 +153,25 @@ def test_an_offender_fails_the_run(
     monkeypatch.setattr(gate, "BASELINE", tmp_path / "complexity-baseline.json")
     assert gate.main([]) == 1
     assert "pkg/bad.py::branchy: cyclomatic" in capsys.readouterr().err
+
+
+def test_a_repeated_name_keeps_both_offenders(
+    gate: ModuleType, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A redefined function is a second offender, not an overwrite."""
+    (tmp_path / "twice.py").write_text(_branchy() + _branchy(), encoding="utf-8")
+    monkeypatch.setattr(gate, "ROOT", tmp_path)
+    report = gate.measure_file(tmp_path / "twice.py")
+    assert set(report) == {"twice.py::branchy", "twice.py::branchy'"}
+
+
+def test_the_script_runs_as_a_command(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    monkeypatch.setattr(sys, "argv", ["check_complexity.py"])
+    with pytest.raises(SystemExit) as stopped:
+        runpy.run_path(
+            str(ROOT / "scripts" / "check_complexity.py"), run_name="__main__"
+        )
+    assert stopped.value.code == 0
+    assert "none worse" in capsys.readouterr().out

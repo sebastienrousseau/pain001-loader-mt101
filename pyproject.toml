@@ -85,6 +85,7 @@ addopts = [
     "--strict-config",
     "-q",
     "--cov=pain001_loader_mt101",
+    "--cov=scripts",
     "--cov-branch",
     "--cov-report=term-missing",
     "--cov-fail-under=100",
@@ -93,7 +94,10 @@ testpaths = ["tests"]
 
 [tool.coverage.run]
 branch = true
-source = ["pain001_loader_mt101"]
+# The scripts gate releases and CI (version agreement, complexity,
+# mutation score, release notes), so a wrong branch there lets a bad
+# release through; they are held to the same floor as the package.
+source = ["pain001_loader_mt101", "scripts"]
 
 [tool.coverage.report]
 exclude_lines = ["pragma: no cover", "raise NotImplementedError"]
