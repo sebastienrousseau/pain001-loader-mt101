@@ -13,8 +13,8 @@ help, by need.
 
 ## Questions & how-to
 
-Open a [GitHub Discussion](https://github.com/sebastienrousseau/pain001-loader-mt101/discussions)
-with:
+Open a [GitHub issue](https://github.com/sebastienrousseau/pain001-loader-mt101/issues/new) (the pain001 suite does not
+use GitHub Discussions) with:
 
 - Python version + OS
 - `pain001-loader-mt101` version + `pain001` version
