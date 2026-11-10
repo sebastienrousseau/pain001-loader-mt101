@@ -10,8 +10,8 @@ security fixes; older `0.0.x` versions do not.
 
 | Version | Status | Receives security fixes? |
 | :--- | :--- | :--- |
-| `0.0.84` (latest) | Current | ✅ Yes |
-| `0.0.83` | Prior | ❌ No, upgrade |
+| `0.0.85` (latest) | Current | ✅ Yes |
+| `0.0.84` | Prior | ❌ No, upgrade |
 
 ## Reporting a vulnerability
 

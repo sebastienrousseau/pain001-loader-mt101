@@ -65,9 +65,9 @@
 pip install pain001-loader-mt101
 ```
 
-> **Latest release: v0.0.84**: coordinated with pain001 0.0.84.
-> Publication workflows now verify every required channel across all nine
-> suite repositories. This component's payment-data behavior is unchanged.
+> **Latest release: v0.0.85**: released with pain001 0.0.85. The parser
+> and the records it emits are unchanged; support questions now go to this
+> repository's GitHub issues.
 
 The package pulls in [`pain001`][core] (0.0.84 or newer, below 1) and
 nothing else. There is no command-line entry point: it is a library.
