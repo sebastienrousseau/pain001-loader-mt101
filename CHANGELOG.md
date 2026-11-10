@@ -9,6 +9,13 @@ suite; the `0.0.1` release targets the `0.0.53` line of `pain001`.
 
 ## [Unreleased]
 
+### Added
+
+- Add a code of conduct (adapted from Contributor Covenant 2.1, the
+  suite's shared text), issue forms, a pull request template, AGENTS.md
+  and a markdownlint CI job (`docs-lint.yml`, configured in
+  `.markdownlint-cli2.jsonc`); fix the Markdown it flagged.
+
 ## [0.0.85] - 2026-11-10
 
 ### Changed
