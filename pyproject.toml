@@ -1,6 +1,6 @@
 [project]
 name = "pain001-loader-mt101"
-version = "0.0.84"
+version = "0.0.85"
 description = "Convert legacy SWIFT MT101 requests for transfer to ISO 20022 pain.001 flat records."
 readme = "README.md"
 requires-python = ">=3.11"
@@ -31,7 +31,7 @@ classifiers = [
 ]
 
 dependencies = [
-    "pain001 >= 0.0.84, < 1",
+    "pain001 >= 0.0.85, < 1",
 ]
 
 [project.optional-dependencies]

@@ -13,8 +13,8 @@ help, by need.
 
 ## Questions & how-to
 
-Open a [GitHub Discussion](https://github.com/sebastienrousseau/pain001-loader-mt101/discussions)
-with:
+Open a [GitHub issue](https://github.com/sebastienrousseau/pain001-loader-mt101/issues/new) (the pain001 suite does not
+use GitHub Discussions) with:
 
 - Python version + OS
 - `pain001-loader-mt101` version + `pain001` version
@@ -47,6 +47,6 @@ disclosure process in [SECURITY.md](SECURITY.md).
 
 | Version | Supported? |
 | :--- | :--- |
-| 0.0.84 (latest) | ✅ |
+| 0.0.85 (latest) | ✅ |
 
-Requires Python 3.11+ and `pain001 >= 0.0.84`.
+Requires Python 3.11+ and `pain001 >= 0.0.85`.

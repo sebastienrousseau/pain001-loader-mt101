@@ -9,6 +9,14 @@ suite; the `0.0.1` release targets the `0.0.53` line of `pain001`.
 
 ## [Unreleased]
 
+## [0.0.85] - 2026-11-10
+
+### Changed
+
+- Release 0.0.85 in lockstep with the pain001 suite and require core
+  pain001 0.0.85; the locks resolve its published artifacts.
+- Point how-to questions in SUPPORT.md and maintainer offers in GOVERNANCE.md at this repository's GitHub issues; the suite does not use GitHub Discussions.
+
 ## [0.0.84] - 2026-11-09
 
 ### Added
