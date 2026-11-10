@@ -69,3 +69,45 @@ def test_the_quick_start_runs_and_validates() -> None:
     snippet = re.search(r"```python\n(.*?)```", _text(), re.DOTALL)
     assert snippet is not None
     exec(compile(snippet.group(1), "README.md", "exec"), {})
+
+
+def _section(title: str) -> str:
+    text = _text()
+    start = text.index(f"\n## {title}\n")
+    end = text.find("\n## ", start + 1)
+    return text[start : end if end != -1 else len(text)]
+
+
+def test_the_documentation_section_opens_with_the_four_family_links() -> None:
+    """Every repository in the family links the same four documents first."""
+    first = _section("Documentation").split("\n\n")[1]
+    labels = re.findall(r"\[([^\]]+)\]\(([^)]+)\)", first)
+    assert labels == [
+        ("User manual", "https://sebastienrousseau.com/pain001-loader-mt101/"),
+        ("API reference", "docs/api.md"),
+        ("Developer docs", "DEVELOPMENT.md"),
+        ("Family map", f"#the-{PROJECT}-ecosystem"),
+    ]
+
+
+SUITE = (
+    "pain001",
+    "pain001-mcp",
+    "pain001-lsp",
+    "pain001-loader-mt101",
+    "pain001-loader-xlsx",
+    "pain001-mockbank",
+    "pain001-plugin-template",
+    "pain001-fast",
+    "pain001.com",
+)
+
+
+def test_the_ecosystem_table_names_all_nine_suite_members() -> None:
+    """The suite is nine repositories (core docs/ecosystem.json)."""
+    rows = re.findall(
+        r"^\| (?:\*\*)?\[?`?([\w.-]+)`?",
+        _section(f"The {PROJECT} ecosystem"),
+        re.MULTILINE,
+    )
+    assert tuple(r for r in rows if r not in {"Component", ":"}) == SUITE

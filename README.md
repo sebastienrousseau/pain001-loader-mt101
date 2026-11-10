@@ -35,7 +35,7 @@
 
 **The pain001-loader-mt101 ecosystem**
 
-- [The pain001-loader-mt101 ecosystem](#the-pain001-loader-mt101-ecosystem) — the pain001 core, its MCP and LSP servers and its loaders
+- [The pain001-loader-mt101 ecosystem](#the-pain001-loader-mt101-ecosystem) — the nine pain001 suite repositories and what each is for
 
 **Library reference**
 
@@ -120,19 +120,23 @@ straight into pain.001 generation.
 
 ## The pain001-loader-mt101 ecosystem
 
-This package is one of the pain001 suite. The core, its MCP and LSP
-servers and its two loaders release together at one version, core first.
+This package is one of the nine pain001 suite repositories. They
+release together at one version, core first.
 New to the target format? [What is pain.001?](https://pain001.com/pain-001/)
 explains it, and <https://pain001.com/mt101-migration/> sets out the
 MT101 migration case.
 
 | Component | Purpose | Use case |
 | :--- | :--- | :--- |
-| [`pain001`][core] | Generates and validates ISO 20022 payment files from tabular data | The core library these records feed |
-| **`pain001-loader-mt101`** | SWIFT MT101 text to pain.001 flat records | A treasury or ERP system still emits MT101 |
-| [`pain001-loader-xlsx`][xlsx] | Excel loader plugin for `.xlsx` / `.xlsm` | Payment batches kept in spreadsheets |
-| [`pain001-mcp`][mcp] | MCP server exposing pain001 validation, generation and inspection | Agent workflows over payment files |
-| [`pain001-lsp`][lsp] | Language server for pain001 input files | Editor support |
+| [`pain001`][core] | Generation, validation, CLI and REST | The core library these records feed |
+| [`pain001-mcp`][mcp] | Model Context Protocol server | Agent tools for payment data |
+| [`pain001-lsp`][lsp] | Language Server Protocol server | Editor diagnostics for payment data |
+| **`pain001-loader-mt101`** | SWIFT MT101 loader plugin | A treasury or ERP system still emits MT101 |
+| [`pain001-loader-xlsx`][xlsx] | Excel loader plugin | Read `.xlsx` and `.xlsm` payment inputs |
+| [`pain001-mockbank`][mockbank] | Synthetic SFTP bank-response test service | Generate pain.002 replies in integration tests |
+| [`pain001-plugin-template`][template] | Cookiecutter plugin scaffold | Develop an external loader or validator |
+| [`pain001-fast`][fast] | Experimental native validation extension | Optional IBAN, BIC and character-set helpers |
+| [pain001.com][site] | Website and browser demo | Browse documentation and try the library |
 
 ---
 
@@ -270,7 +274,10 @@ the examples. CI also runs the dependency audit (`pip-audit` over every
 `requirements/*.txt`), Atheris fuzzing of `parse_mt101` (two minutes per
 change, thirty weekly, seeded from `fuzz/corpus/`), mutation testing of
 the parser, CodeQL, OpenSSF Scorecard, the DCO check and a daily Suite
-Consistency check against PyPI. See [`CONTRIBUTING.md`](CONTRIBUTING.md).
+Consistency check of all nine suite publications.
+[`DEVELOPMENT.md`](DEVELOPMENT.md) maps each CI gate to the command that
+reproduces it; [`CONTRIBUTING.md`](CONTRIBUTING.md) covers commits and
+review.
 
 ---
 
@@ -279,8 +286,10 @@ Consistency check against PyPI. See [`CONTRIBUTING.md`](CONTRIBUTING.md).
 The loader parses text: it reads no files, opens no sockets and parses no
 XML. Input outside the grammar (including dates that do not exist and
 amounts outside the SWIFT form) is rejected with a `ValueError` naming
-the field. Cap the size of untrusted input before parsing it. The parser is fuzzed with Atheris in CI and
-with Hypothesis in the test suite. Releases are published from a signed
+the field. Cap the size of untrusted input before parsing it. The
+parser is fuzzed with Atheris in CI and with Hypothesis in the test
+suite, and every fixed-bug input in `fuzz/corpus/` is replayed on every
+test run. Releases are published from a signed
 tag through PyPI Trusted Publishing, with SLSA build provenance, sigstore
 signatures and SPDX and CycloneDX SBOMs.
 
@@ -292,10 +301,13 @@ Report vulnerabilities according to [`SECURITY.md`](SECURITY.md).
 
 [User manual](https://sebastienrousseau.com/pain001-loader-mt101/) ·
 [API reference](docs/api.md) ·
-[Developer guide](CONTRIBUTING.md) ·
-[Family map](#the-pain001-loader-mt101-ecosystem) ·
-[Changelog](CHANGELOG.md) · [Policies](docs/POLICIES.md) ·
-[Architecture](ARCHITECTURE.md) · [Decisions](docs/adr/index.md)
+[Developer docs](DEVELOPMENT.md) ·
+[Family map](#the-pain001-loader-mt101-ecosystem)
+
+Also: [Architecture](ARCHITECTURE.md) · [Decisions](docs/adr/index.md) ·
+[Policies](docs/POLICIES.md) · [Changelog](CHANGELOG.md) ·
+[Contributing](CONTRIBUTING.md) · [Security policy](SECURITY.md) ·
+[Support](SUPPORT.md)
 
 ---
 
@@ -324,3 +336,7 @@ at your option. Dependencies keep their own licences.
 [mcp]: https://github.com/sebastienrousseau/pain001-mcp
 [lsp]: https://github.com/sebastienrousseau/pain001-lsp
 [xlsx]: https://github.com/sebastienrousseau/pain001-loader-xlsx
+[mockbank]: https://github.com/sebastienrousseau/pain001-mockbank
+[template]: https://github.com/sebastienrousseau/pain001-plugin-template
+[fast]: https://github.com/sebastienrousseau/pain001-fast
+[site]: https://github.com/sebastienrousseau/pain001.github.io

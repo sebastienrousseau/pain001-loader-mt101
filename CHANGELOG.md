@@ -36,6 +36,11 @@ suite; the `0.0.1` release targets the `0.0.53` line of `pain001`.
 - CONTRIBUTING.md drops instructions that no longer matched the tree (a
   `test_stress.py` that does not exist, a 32-repository suite, a
   two-file version bump) and points to DEVELOPMENT.md.
+- The README's ecosystem table lists all nine suite repositories, with
+  the purposes the core's `docs/ecosystem.json` records; its
+  Documentation section opens with the family's four links (manual, API
+  reference, DEVELOPMENT.md, family map). `tests/test_readme_template.py`
+  checks both.
 
 ### Removed
 
