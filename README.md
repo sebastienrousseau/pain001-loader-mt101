@@ -20,7 +20,7 @@
 </p>
 
 <p align="center">
-  <img src=".github/demo.gif" alt="pain001-loader-mt101 demo: the MT101 text in examples/01_minimal_parse.py, the pain.001 records it prints with party data redacted, then a :30: date of 30 February rejected with a ValueError" width="100%" />
+  <img src="https://raw.githubusercontent.com/sebastienrousseau/pain001-loader-mt101/main/.github/demo.gif" alt="pain001-loader-mt101 demo: the MT101 text in examples/01_minimal_parse.py, the pain.001 records it prints with party data redacted, then a :30: date of 30 February rejected with a ValueError" width="100%" />
 </p>
 
 ---

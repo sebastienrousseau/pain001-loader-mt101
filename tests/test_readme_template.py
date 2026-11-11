@@ -15,6 +15,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 README = ROOT / "README.md"
 PROJECT = "pain001-loader-mt101"
+RAW = f"https://raw.githubusercontent.com/sebastienrousseau/{PROJECT}/main/"
 
 HEADINGS = [
     "Contents",
@@ -59,9 +60,18 @@ def test_every_badge_is_28_pixels_high() -> None:
 
 def test_the_demo_sits_under_the_badges_and_exists() -> None:
     demo = _text().split('<p align="center">')[4]
-    assert 'src=".github/demo.gif"' in demo
+    assert f'src="{RAW}.github/demo.gif"' in demo
     assert (ROOT / ".github" / "demo.gif").is_file()
     assert (ROOT / ".github" / "demo.tape").is_file()
+
+
+def test_every_image_is_an_absolute_url() -> None:
+    """PyPI does not resolve relative paths, so every image is absolute."""
+    sources = re.findall(r'(?:src|srcset)="([^"]+)"', _text())
+    assert sources
+    assert all(source.startswith("https://") for source in sources), sources
+    tree = [s.removeprefix(RAW) for s in sources if s.startswith(RAW)]
+    assert all((ROOT / path).is_file() for path in tree), tree
 
 
 def test_the_quick_start_runs_and_validates() -> None:
