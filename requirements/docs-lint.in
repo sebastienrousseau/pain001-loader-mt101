@@ -1,0 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Sebastien Rousseau <sebastian.rousseau@gmail.com>
+# SPDX-License-Identifier: Apache-2.0 OR MIT
+# Spelling for the docs-lint job (codespell, configured in pyproject.toml).
+# Same version as the pain001 core's docs-lint job and the pre-commit hook.
+# Regenerate with: make pip-compile
+codespell==2.4.1

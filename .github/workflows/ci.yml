@@ -34,13 +34,11 @@ jobs:
           pip install --require-hashes -r requirements/test.txt
           pip install --no-deps -e .
 
-      - name: Run tests with 100% coverage gate
-        run: |
-          pytest tests/ \
-            --cov=pain001_loader_mt101 --cov-branch \
-            --cov-report=term-missing \
-            --cov-report=xml \
-            --cov-fail-under=100
+      # The coverage scope (package and scripts), branch mode and the
+      # 100% floor live in pyproject.toml's addopts, so `make test` and
+      # this step cannot drift apart.
+      - name: Run tests with 100% line and branch coverage gate
+        run: pytest --cov-report=xml
 
       # Not a timing gate -- wall-clock is not comparable between
       # runners. This proves the benchmark still runs against the

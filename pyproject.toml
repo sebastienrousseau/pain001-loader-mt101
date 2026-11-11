@@ -1,6 +1,6 @@
 [project]
 name = "pain001-loader-mt101"
-version = "0.0.85"
+version = "0.0.86"
 description = "Convert legacy SWIFT MT101 requests for transfer to ISO 20022 pain.001 flat records."
 readme = "README.md"
 requires-python = ">=3.11"
@@ -31,7 +31,7 @@ classifiers = [
 ]
 
 dependencies = [
-    "pain001 >= 0.0.85, < 1",
+    "pain001 >= 0.0.86, < 1",
 ]
 
 [project.optional-dependencies]
@@ -85,6 +85,7 @@ addopts = [
     "--strict-config",
     "-q",
     "--cov=pain001_loader_mt101",
+    "--cov=scripts",
     "--cov-branch",
     "--cov-report=term-missing",
     "--cov-fail-under=100",
@@ -93,11 +94,21 @@ testpaths = ["tests"]
 
 [tool.coverage.run]
 branch = true
-source = ["pain001_loader_mt101"]
+# The scripts gate releases and CI (version agreement, complexity,
+# mutation score, release notes), so a wrong branch there lets a bad
+# release through; they are held to the same floor as the package.
+source = ["pain001_loader_mt101", "scripts"]
 
 [tool.coverage.report]
 exclude_lines = ["pragma: no cover", "raise NotImplementedError"]
 show_missing = true
+
+[tool.codespell]
+# Spelling gate for the docs-lint job and the pre-commit hook. Skips
+# caches, build output, hash-pinned requirements and the fuzz corpus,
+# whose inputs are malformed on purpose.
+skip = "./.git,./.venv,./.mypy_cache,./.ruff_cache,./.pytest_cache,./.hypothesis,./.complexipy_cache,./.benchmarks,./docs/_build,./mutants,./requirements/*.txt,./fuzz/corpus,*.gif,./.coverage,./coverage.xml"
+quiet-level = 3
 
 [tool.interrogate]
 fail-under = 100

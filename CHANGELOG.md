@@ -9,6 +9,53 @@ suite; the `0.0.1` release targets the `0.0.53` line of `pain001`.
 
 ## [Unreleased]
 
+## [0.0.86] - 2026-11-11
+
+### Added
+
+- Add a code of conduct (adapted from Contributor Covenant 2.1, the
+  suite's shared text), issue forms, a pull request template, AGENTS.md
+  and a markdownlint CI job (`docs-lint.yml`, configured in
+  `.markdownlint-cli2.jsonc`); fix the Markdown it flagged.
+- Run every example from the test suite (`tests/test_examples.py`), so
+  each leg of the Python matrix proves they still work.
+- Hold `scripts/` to the same 100% line and branch coverage floor as the
+  package, with tests for the mutation gate, the complexity gate's
+  duplicate-name path and each script's command-line entry point.
+- Add DEVELOPMENT.md (toolchain, every CI gate and its local command,
+  test layout, the coverage rationale, the release model), included in
+  the manual with ARCHITECTURE.md; `.editorconfig`; a
+  `.pre-commit-config.yaml` with every hook pinned by commit SHA; a
+  devcontainer that runs `make install && make check`; and codespell in
+  the docs-lint job, hash-pinned in `requirements/docs-lint.txt`, with
+  `make docs-lint` to run it and markdownlint locally.
+- Check every relative link and `#anchor` in the repository's Markdown
+  on every test run (`tests/test_docs_links.py`), so a moved file or a
+  renamed heading fails the pull request instead of the rendered manual.
+
+### Changed
+
+- Release 0.0.86 in lockstep with the pain001 suite and require core
+  pain001 0.0.86; the locks resolve its published artifacts.
+- SECURITY.md states the suite's response goals as the core does (no
+  SLA; acknowledgement goal within 5 working days) instead of a 48-hour
+  acknowledgement and 7-day triage the core does not commit to.
+- CONTRIBUTING.md drops instructions that no longer matched the tree (a
+  `test_stress.py` that does not exist, a 32-repository suite, a
+  two-file version bump) and points to DEVELOPMENT.md.
+- The README's ecosystem table lists all nine suite repositories, with
+  the purposes the core's `docs/ecosystem.json` records; its
+  Documentation section opens with the family's four links (manual, API
+  reference, DEVELOPMENT.md, family map). `tests/test_readme_template.py`
+  checks both.
+
+### Removed
+
+- `scripts/check_suite_consistency.py` and its test. No workflow ran it
+  since the daily Suite Consistency job moved to the core's shared
+  checker in 0.0.84, and its member list named five of the nine suite
+  repositories.
+
 ## [0.0.85] - 2026-11-10
 
 ### Changed

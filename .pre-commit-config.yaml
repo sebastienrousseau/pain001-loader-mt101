@@ -1,0 +1,38 @@
+# SPDX-License-Identifier: Apache-2.0 OR MIT
+# Local hooks mirroring the cheap CI gates. Install once with
+# `pre-commit install`; CI remains the authority. Each hook is pinned by
+# commit SHA, with its tag beside it. The ruff and markdownlint-cli2
+# versions match requirements/lint.txt and docs-lint.yml.
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c # frozen: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: \.md$|^fuzz/corpus/
+      - id: end-of-file-fixer
+        exclude: ^fuzz/corpus/|\.gif$
+      - id: check-yaml
+      - id: check-toml
+      - id: check-added-large-files
+        args: ["--maxkb=2048"]
+      - id: check-merge-conflict
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: c0f278f1254ccc8fb09676bcdb8d847e7db493e5 # frozen: v0.17.4
+    hooks:
+      # Python only, as make lint runs it: ruff can also format code
+      # blocks in Markdown, which CI does not ask for.
+      - id: ruff-check
+        types_or: [python, pyi]
+      - id: ruff-format
+        types_or: [python, pyi]
+  - repo: https://github.com/codespell-project/codespell
+    rev: 63c8f8312b7559622c0d82815639671ae42132ac # frozen: v2.4.1
+    hooks:
+      - id: codespell
+  - repo: https://github.com/DavidAnson/markdownlint-cli2
+    rev: 916ad0aaa108c64d294101002066f530ea170b10 # frozen: v0.23.3
+    hooks:
+      - id: markdownlint-cli2
+        # The Node already on PATH (the devcontainer installs one), rather
+        # than a nodeenv download, which fails to parse some Node versions.
+        language_version: system

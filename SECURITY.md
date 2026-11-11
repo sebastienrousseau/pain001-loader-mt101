@@ -10,8 +10,8 @@ security fixes; older `0.0.x` versions do not.
 
 | Version | Status | Receives security fixes? |
 | :--- | :--- | :--- |
-| `0.0.85` (latest) | Current | ✅ Yes |
-| `0.0.84` | Prior | ❌ No, upgrade |
+| `0.0.86` (latest) | Current | ✅ Yes |
+| `0.0.85` | Prior | ❌ No, upgrade |
 
 ## Reporting a vulnerability
 
@@ -19,7 +19,18 @@ security fixes; older `0.0.x` versions do not.
 Private Vulnerability Reporting:
 <https://github.com/sebastienrousseau/pain001-loader-mt101/security/advisories/new>
 
-**Acknowledgement**: within 48 hours. **Triage**: within 7 days.
+Please include a description and its impact, a minimal MT101 input that
+reproduces it (synthetic values only), and the affected version
+(`python -c "import pain001_loader_mt101; print(pain001_loader_mt101.__version__)"`).
+
+These are goals, not guarantees: the pain001 suite is maintained in a
+personal capacity, with no SLA and no out-of-hours cover.
+
+**Acknowledgement**: the goal is within 5 working days.
+**Triage**: a severity assessment and remediation plan after
+acknowledgement.
+**Fix windows** (best effort): critical 7 days, high 30 days, medium 60
+days, low best-effort. The clock starts at triage, not at report.
 
 ## Security posture
 
@@ -39,7 +50,7 @@ outside that grammar is rejected with a `ValueError` or omitted.
 | **Catastrophic regex backtracking** | Field regexes are anchored (`^`, `$`) with bounded quantifiers (`\d{6}`, `[A-Z]{3}`). No nested unbounded groups. |
 | **Path traversal** | The loader never touches the filesystem. Callers pass strings, not paths. |
 | **Resource exhaustion** | Parsing is O(input size). Impose an upstream byte cap for hostile input. |
-| **Dependency CVEs** | `pain001 >= 0.0.85, < 1` is the only runtime dependency. |
+| **Dependency CVEs** | `pain001 >= 0.0.86, < 1` is the only runtime dependency. |
 
 ### Cryptography status
 

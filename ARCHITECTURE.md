@@ -32,9 +32,10 @@ message goes through the same three checks as any other input.
 | **Public API** | `pain001_loader_mt101/__init__.py` | Exports `parse_mt101` and `__version__` |
 | **Parser** | `pain001_loader_mt101/loader.py` | Block-4 unwrapping, field iteration, Sequence A/B splitting, party and amount parsing, record assembly |
 | **Tests** | `tests/` | Grammar, field mapping, strictness, examples run end to end, the suite conformance file |
-| **Examples** | `examples/` | Runnable scripts, executed by the tests |
+| **Examples** | `examples/` | Runnable scripts, executed by `tests/test_examples.py` and in CI |
 | **Benchmarks** | `benches/` | Parse throughput and its scaling |
-| **Suite** | `scripts/check_suite_consistency.py`, `tests/test_suite_conformance.py` | The shared checks every suite member carries |
+| **Scripts** | `scripts/` | Release and CI gates (version agreement, complexity, mutation score, release notes), held to the same 100% coverage floor as the package |
+| **Suite** | `.github/workflows/suite-consistency.yml`, `tests/test_suite_conformance.py` | The shared checks every suite member carries; the daily publication audit runs the core's checker |
 
 ## Key design decisions
 

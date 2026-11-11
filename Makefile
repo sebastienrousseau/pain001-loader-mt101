@@ -8,7 +8,7 @@ PY ?= .venv/bin/python
 BIN := $(dir $(PY))
 PKG := pain001_loader_mt101
 
-.PHONY: help install test cov lint format typecheck docstrings examples complexity audit verify-versions pip-compile fuzz demo check clean docs mutate
+.PHONY: help install test cov lint format typecheck docstrings examples complexity audit verify-versions pip-compile fuzz demo check clean docs docs-lint mutate
 
 help: ## Show this help.
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
@@ -89,6 +89,10 @@ MUTATION_FLOOR ?= 88
 
 docs: ## Build the Sphinx documentation (warnings are errors; needs requirements/docs.txt)
 	$(PY) -m sphinx -W --keep-going -b html docs docs/_build/html
+
+docs-lint: ## codespell and markdownlint, as docs-lint.yml runs them (needs requirements/docs-lint.txt and npx)
+	$(BIN)codespell
+	npx --yes markdownlint-cli2@0.23.3 "**/*.md"
 
 mutate: ## Mutation testing (mutmut 3, config in pyproject; needs requirements/mutation.txt)
 	rm -rf mutants
