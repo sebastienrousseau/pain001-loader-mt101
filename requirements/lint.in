@@ -3,7 +3,7 @@
 # Lint, format and type-check tooling for the CI "lint" job. pain001 is
 # included so mypy --strict resolves the real package.
 # Regenerate with: make pip-compile
-pain001>=0.0.85,<1
+pain001>=0.0.86,<1
 ruff==0.17.4
 mypy>=1.11,<3
 # The complexity gate is type-checked with its own tools installed.
