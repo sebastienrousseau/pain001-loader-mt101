@@ -14,6 +14,11 @@ calendar, and the maintainer decides what opens.
 - 100% line and branch coverage, docstring gate, benchmarks, examples run
   by the tests; CodeQL, Dependabot, DCO and Scorecard; releases attested,
   signed and shipped with SBOMs.
+- Mutation testing (mutmut 3) of the parser on every pull request into
+  `main`, every push to `main` and weekly
+  (`.github/workflows/mutation.yml`); the build fails when the share of
+  reached mutants the tests kill drops below 88%
+  (`scripts/mutation_gate.py`).
 
 ## Candidates
 
@@ -23,8 +28,6 @@ calendar, and the maintainer decides what opens.
   dropping them silently. Needs a decision on the core's vocabulary first.
 - **A corpus scenario sourced from an MT101 message**, so the site's
   example corpus shows the conversion end to end with provenance.
-- **Mutation testing** on the parser on the pattern the MCP and LSP
-  servers use.
 
 ## Out of scope
 
