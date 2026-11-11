@@ -29,30 +29,30 @@
 
 **Getting started**
 
-- [Install](#install) — `pip`, one runtime dependency
-- [Requirements](#requirements) — toolchain floor, platforms
-- [Quick Start](#quick-start) — one call from MT101 text to schema-valid pain.001 records
+- [Install](#install): `pip`, one runtime dependency
+- [Requirements](#requirements): toolchain floor, platforms
+- [Quick Start](#quick-start): one call from MT101 text to schema-valid pain.001 records
 
 **The pain001-loader-mt101 ecosystem**
 
-- [The pain001-loader-mt101 ecosystem](#the-pain001-loader-mt101-ecosystem) — the nine pain001 suite repositories and what each is for
+- [The pain001-loader-mt101 ecosystem](#the-pain001-loader-mt101-ecosystem): the nine pain001 suite repositories and what each is for
 
 **Library reference**
 
-- [Capabilities at a glance](#capabilities-at-a-glance) — the current surface by theme
-- [Ecosystem comparison](#ecosystem-comparison) — short matrix; full table at [`docs/COMPARISON.md`](docs/COMPARISON.md)
-- [Benchmarks](#benchmarks) — headline numbers; full table at [`docs/BENCHMARKS.md`](docs/BENCHMARKS.md)
-- [Features](#features) — module-level capability list
-- [Configuration](#configuration) — core options
-- [Examples](#examples) — runnable example index
+- [Capabilities at a glance](#capabilities-at-a-glance): the current surface by theme
+- [Ecosystem comparison](#ecosystem-comparison): short matrix; full table at [`docs/COMPARISON.md`](docs/COMPARISON.md)
+- [Benchmarks](#benchmarks): headline numbers; full table at [`docs/BENCHMARKS.md`](docs/BENCHMARKS.md)
+- [Features](#features): module-level capability list
+- [Configuration](#configuration): core options
+- [Examples](#examples): runnable example index
 
 **Operational**
 
-- [When not to use pain001-loader-mt101](#when-not-to-use-pain001-loader-mt101) — limitations
-- [Development](#development) — make targets, fuzzing, CI
-- [Security](#security) — guarantees and compliance
-- [Documentation](#documentation) — all reference docs
-- [Stability guarantees](#stability-guarantees) — SemVer axis, output stability, minimum toolchain discipline
+- [When not to use pain001-loader-mt101](#when-not-to-use-pain001-loader-mt101): limitations
+- [Development](#development): make targets, fuzzing, CI
+- [Security](#security): guarantees and compliance
+- [Documentation](#documentation): all reference docs
+- [Stability guarantees](#stability-guarantees): SemVer axis, output stability, minimum toolchain discipline
 - [License](#license)
 
 ---
