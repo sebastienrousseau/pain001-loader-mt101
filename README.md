@@ -292,6 +292,8 @@ suite, and every fixed-bug input in `fuzz/corpus/` is replayed on every
 test run. Releases are published from a signed
 tag through PyPI Trusted Publishing, with SLSA build provenance, sigstore
 signatures and SPDX and CycloneDX SBOMs.
+The project holds the
+[OpenSSF Best Practices passing badge](https://www.bestpractices.dev/projects/15788).
 
 Report vulnerabilities according to [`SECURITY.md`](SECURITY.md).
 
