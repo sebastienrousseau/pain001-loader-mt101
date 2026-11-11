@@ -9,6 +9,13 @@ suite; the `0.0.1` release targets the `0.0.53` line of `pain001`.
 
 ## [Unreleased]
 
+### Fixed
+
+- Suite Consistency pins the core's ecosystem check at `febcd0a`, which
+  accepts the five pain001 SDK repositories as known members not yet
+  released. From the 0.0.86 release until this change every scheduled
+  run failed on them as undeclared repositories.
+
 ## [0.0.86] - 2026-11-11
 
 ### Added
