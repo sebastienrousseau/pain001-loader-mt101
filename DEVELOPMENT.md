@@ -49,6 +49,7 @@ Code container.
 | Dependency advisories over every `requirements/*.txt` | `make audit` (needs `requirements/audit.txt`) | `ci.yml` (Dependency audit) |
 | Spelling and Markdown style | `make docs-lint` (needs `requirements/docs-lint.txt` and Node) | `docs-lint.yml` |
 | Sphinx manual, warnings are errors | `make docs` (needs `requirements/docs.txt`) | `docs.yml` |
+| Relative links and anchors in every Markdown file | `make test` (`tests/test_docs_links.py`) | `ci.yml` |
 | Atheris fuzzing of `parse_mt101` | `make fuzz` (Linux x86_64, needs `requirements/fuzz.txt`) | `fuzz.yml` |
 | Mutation score of the parser, floor 88% | `make mutate` (needs `requirements/mutation.txt`) | `mutation.yml` |
 | DCO sign-off on every commit | `git log --format=%B` shows `Signed-off-by:` | `dco.yml` |
@@ -82,6 +83,7 @@ tests/
   test_examples.py            every script in examples/ runs and prints its result
   test_readme_template.py     README heading order, badges, demo, no {{...}} left,
                               the Quick Start executed
+  test_docs_links.py          every relative link and #anchor in the Markdown resolves
   test_verify_versions.py     scripts/verify_versions.py, one drift at a time
   test_check_complexity.py    scripts/check_complexity.py and its baseline ratchet
   test_mutation_gate.py       scripts/mutation_gate.py
@@ -105,7 +107,10 @@ to GitHub Pages from `main`. Root Markdown files (`README.md`,
 `ARCHITECTURE.md`, this file, `CHANGELOG.md`) are included into the
 manual by thin chapter files under `docs/`, so each is edited in one
 place. The API reference (`docs/api.md`) is generated from docstrings,
-which `make docstrings` holds at 100%. Decisions that will be questioned
+which `make docstrings` holds at 100%. `tests/test_docs_links.py` fails
+a pull request whose Markdown links to a file or heading that does not
+exist; external URLs are not fetched, so a third-party outage cannot
+fail the build. Decisions that will be questioned
 later get an ADR in [`docs/adr/`](docs/adr/index.md).
 
 ## Versioning and release

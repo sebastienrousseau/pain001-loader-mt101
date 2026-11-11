@@ -27,6 +27,9 @@ suite; the `0.0.1` release targets the `0.0.53` line of `pain001`.
   devcontainer that runs `make install && make check`; and codespell in
   the docs-lint job, hash-pinned in `requirements/docs-lint.txt`, with
   `make docs-lint` to run it and markdownlint locally.
+- Check every relative link and `#anchor` in the repository's Markdown
+  on every test run (`tests/test_docs_links.py`), so a moved file or a
+  renamed heading fails the pull request instead of the rendered manual.
 
 ### Changed
 
