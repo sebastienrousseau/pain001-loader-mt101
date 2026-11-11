@@ -9,6 +9,8 @@ suite; the `0.0.1` release targets the `0.0.53` line of `pain001`.
 
 ## [Unreleased]
 
+## [0.0.86] - 2026-11-11
+
 ### Added
 
 - Add a code of conduct (adapted from Contributor Covenant 2.1, the
@@ -33,6 +35,7 @@ suite; the `0.0.1` release targets the `0.0.53` line of `pain001`.
 
 ### Changed
 
+- Release 0.0.86 in lockstep with the pain001 suite.
 - SECURITY.md states the suite's response goals as the core does (no
   SLA; acknowledgement goal within 5 working days) instead of a 48-hour
   acknowledgement and 7-day triage the core does not commit to.

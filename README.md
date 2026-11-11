@@ -65,9 +65,9 @@
 pip install pain001-loader-mt101
 ```
 
-> **Latest release: v0.0.85**: released with pain001 0.0.85. The parser
-> and the records it emits are unchanged; support questions now go to this
-> repository's GitHub issues.
+> **Latest release: v0.0.86**: released with pain001 0.0.86. The parser
+> and the records it emits are unchanged; the repository gains a
+> community baseline, DEVELOPMENT.md and checked Markdown links.
 
 The package pulls in [`pain001`][core] (0.0.85 or newer, below 1) and
 nothing else. There is no command-line entry point: it is a library.
