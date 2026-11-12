@@ -9,8 +9,11 @@ suite; the `0.0.1` release targets the `0.0.53` line of `pain001`.
 
 ## [Unreleased]
 
+## [0.0.87] - 2026-11-12
+
 ### Changed
 
+- Release 0.0.87 in lockstep with the pain001 suite.
 - Requires pain001 0.0.87, the suite version this release ships in
   lockstep with.
 - Suite Consistency no longer runs on another workflow's completion

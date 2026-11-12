@@ -11,8 +11,8 @@ authors:
   - family-names: Rousseau
     given-names: Sebastien
     email: sebastian.rousseau@gmail.com
-version: "0.0.86"
-date-released: "2026-11-11"
+version: "0.0.87"
+date-released: "2026-11-12"
 # Dual-licensed, at the user's option (LICENSE, LICENSE-APACHE,
 # LICENSE-MIT). CFF 1.2.0 takes SPDX licence identifiers, not an SPDX
 # expression; a list of several means the work is available under any of
