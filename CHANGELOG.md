@@ -9,6 +9,14 @@ suite; the `0.0.1` release targets the `0.0.53` line of `pain001`.
 
 ## [Unreleased]
 
+### Changed
+
+- Suite Consistency no longer runs on another workflow's completion
+  (`workflow_run`). It audits the family daily and on dispatch, as the
+  core's does, since that trigger runs with the default branch's trust
+  whatever started it. Regenerated from pain001's
+  `scripts/render_ecosystem_workflows.py`.
+
 ### Added
 
 - The README's Security section names the project's
