@@ -11,6 +11,8 @@ suite; the `0.0.1` release targets the `0.0.53` line of `pain001`.
 
 ### Changed
 
+- Requires pain001 0.0.88, the suite version this release ships in
+  lockstep with.
 - Suite Consistency pins the core's ecosystem check at `404ebb9`, the
   pain001 0.0.88 release, which audits the five SDK repositories with
   the rest of the family; the job is now named "Every family
