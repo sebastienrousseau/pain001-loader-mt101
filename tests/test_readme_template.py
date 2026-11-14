@@ -110,11 +110,16 @@ SUITE = (
     "pain001-plugin-template",
     "pain001-fast",
     "pain001.com",
+    "pain001-sdk-go",
+    "pain001-sdk-java",
+    "pain001-sdk-rust",
+    "pain001-sdk-dotnet",
+    "pain001-sdk-cpp",
 )
 
 
-def test_the_ecosystem_table_names_all_nine_suite_members() -> None:
-    """The suite is nine repositories (core docs/ecosystem.json)."""
+def test_the_ecosystem_table_names_every_suite_member() -> None:
+    """The suite is fourteen repositories (core docs/ecosystem.json)."""
     rows = re.findall(
         r"^\| (?:\*\*)?\[?`?([\w.-]+)`?",
         _section(f"The {PROJECT} ecosystem"),

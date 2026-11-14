@@ -9,6 +9,22 @@ suite; the `0.0.1` release targets the `0.0.53` line of `pain001`.
 
 ## [Unreleased]
 
+## [0.0.88] - 2026-11-14
+
+### Changed
+
+- Release 0.0.88 in lockstep with the pain001 suite.
+- Requires pain001 0.0.88, the suite version this release ships in
+  lockstep with.
+- Suite Consistency pins the core's ecosystem check at `404ebb9`, the
+  pain001 0.0.88 release, which audits the five SDK repositories with
+  the rest of the family; the job is now named "Every family
+  publication agrees". Regenerated from pain001's
+  `scripts/render_ecosystem_workflows.py`.
+- The README's ecosystem table and AGENTS.md name the fourteen suite
+  repositories: the Go, Java, Rust, .NET and C++ SDKs joined the family
+  at 0.0.88.
+
 ### Security
 
 - The docs toolchain requires soupsieve 4.0 or newer: earlier versions

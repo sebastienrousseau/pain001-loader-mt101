@@ -35,7 +35,7 @@
 
 **The pain001-loader-mt101 ecosystem**
 
-- [The pain001-loader-mt101 ecosystem](#the-pain001-loader-mt101-ecosystem): the nine pain001 suite repositories and what each is for
+- [The pain001-loader-mt101 ecosystem](#the-pain001-loader-mt101-ecosystem): the fourteen pain001 suite repositories and what each is for
 
 **Library reference**
 
@@ -65,11 +65,11 @@
 pip install pain001-loader-mt101
 ```
 
-> **Latest release: v0.0.87**: released with pain001 0.0.87. The parser
+> **Latest release: v0.0.88**: released with pain001 0.0.88. The parser
 > and the records it emits are unchanged; the package now requires
-> pain001 0.0.87.
+> pain001 0.0.88.
 
-The package pulls in [`pain001`][core] (0.0.87 or newer, below 1) and
+The package pulls in [`pain001`][core] (0.0.88 or newer, below 1) and
 nothing else. There is no command-line entry point: it is a library.
 
 ---
@@ -78,7 +78,7 @@ nothing else. There is no command-line entry point: it is a library.
 
 - Python 3.11 or newer, tested in CI on 3.11, 3.12, 3.13 and 3.14 on
   Linux ([toolchain policy](docs/POLICIES.md)).
-- `pain001` 0.0.87 or newer on the 0.x line.
+- `pain001` 0.0.88 or newer on the 0.x line.
 - Pure Python, so any platform CPython runs on; CI exercises Linux only.
 
 ---
@@ -120,7 +120,7 @@ straight into pain.001 generation.
 
 ## The pain001-loader-mt101 ecosystem
 
-This package is one of the nine pain001 suite repositories. They
+This package is one of the fourteen pain001 suite repositories. They
 release together at one version, core first.
 New to the target format? [What is pain.001?](https://pain001.com/pain-001/)
 explains it, and <https://pain001.com/mt101-migration/> sets out the
@@ -137,6 +137,11 @@ MT101 migration case.
 | [`pain001-plugin-template`][template] | Cookiecutter plugin scaffold | Develop an external loader or validator |
 | [`pain001-fast`][fast] | Experimental native validation extension | Optional IBAN, BIC and character-set helpers |
 | [pain001.com][site] | Website and browser demo | Browse documentation and try the library |
+| [`pain001-sdk-go`][sdk-go] | Go client for the REST API, tested with the conformance kit | Call the REST API from Go services |
+| [`pain001-sdk-java`][sdk-java] | Java client for the REST API, tested with the conformance kit | Call the REST API from JVM applications |
+| [`pain001-sdk-rust`][sdk-rust] | Rust client for the REST API, tested with the conformance kit | Call the REST API from Rust programs |
+| [`pain001-sdk-dotnet`][sdk-dotnet] | .NET client for the REST API, tested with the conformance kit | Call the REST API from .NET applications |
+| [`pain001-sdk-cpp`][sdk-cpp] | C++ client for the REST API, tested with the conformance kit | Call the REST API from C++ programs |
 
 ---
 
@@ -274,7 +279,7 @@ the examples. CI also runs the dependency audit (`pip-audit` over every
 `requirements/*.txt`), Atheris fuzzing of `parse_mt101` (two minutes per
 change, thirty weekly, seeded from `fuzz/corpus/`), mutation testing of
 the parser, CodeQL, OpenSSF Scorecard, the DCO check and a daily Suite
-Consistency check of all nine suite publications.
+Consistency check of every suite publication.
 [`DEVELOPMENT.md`](DEVELOPMENT.md) maps each CI gate to the command that
 reproduces it; [`CONTRIBUTING.md`](CONTRIBUTING.md) covers commits and
 review.
@@ -342,3 +347,8 @@ at your option. Dependencies keep their own licences.
 [template]: https://github.com/sebastienrousseau/pain001-plugin-template
 [fast]: https://github.com/sebastienrousseau/pain001-fast
 [site]: https://github.com/sebastienrousseau/pain001.github.io
+[sdk-go]: https://github.com/sebastienrousseau/pain001-sdk-go
+[sdk-java]: https://github.com/sebastienrousseau/pain001-sdk-java
+[sdk-rust]: https://github.com/sebastienrousseau/pain001-sdk-rust
+[sdk-dotnet]: https://github.com/sebastienrousseau/pain001-sdk-dotnet
+[sdk-cpp]: https://github.com/sebastienrousseau/pain001-sdk-cpp

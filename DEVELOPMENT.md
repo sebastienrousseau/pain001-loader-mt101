@@ -54,7 +54,7 @@ Code container.
 | Mutation score of the parser, floor 88% | `make mutate` (needs `requirements/mutation.txt`) | `mutation.yml` |
 | DCO sign-off on every commit | `git log --format=%B` shows `Signed-off-by:` | `dco.yml` |
 | CodeQL, OpenSSF Scorecard | none locally | `codeql.yml`, `scorecard.yml` |
-| Nine-member suite publications agree | none locally; the core's `make ecosystem-check` | `suite-consistency.yml` (daily and after a release) |
+| Every suite publication agrees | none locally; the core's `make ecosystem-check` | `suite-consistency.yml` (daily and after a release) |
 
 `make check` runs lint, typecheck, complexity, verify-versions, test,
 docstrings and examples, in that order, and is what a pull request must
