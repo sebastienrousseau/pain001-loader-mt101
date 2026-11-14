@@ -12,7 +12,7 @@ follow them too. Read [CONTRIBUTING.md](CONTRIBUTING.md) and
 ## Versioning
 
 - The version is `0.0.x`, moves by `0.0.1`, and ships in lockstep with
-  the other eight `pain001` suite repositories. Never bump it as a side
+  the other thirteen `pain001` suite repositories. Never bump it as a side
   effect of a change.
 - It is restated in `pyproject.toml`, `pain001_loader_mt101/__init__.py`,
   `CITATION.cff` and the README's latest-release callout, with a
