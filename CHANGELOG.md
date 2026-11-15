@@ -9,8 +9,6 @@ suite; the `0.0.1` release targets the `0.0.53` line of `pain001`.
 
 ## [Unreleased]
 
-## [0.0.89] - Unreleased
-
 ## [0.0.88] - 2026-11-14
 
 ### Changed
