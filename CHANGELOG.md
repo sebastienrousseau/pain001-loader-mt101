@@ -9,6 +9,11 @@ suite; the `0.0.1` release targets the `0.0.53` line of `pain001`.
 
 ## [Unreleased]
 
+### Changed
+
+- Requires pain001 0.0.90, the suite version this release ships in
+  lockstep with.
+
 ## [0.0.89] - 2026-11-16
 
 ### Changed
