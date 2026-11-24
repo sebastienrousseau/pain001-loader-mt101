@@ -9,6 +9,16 @@ suite; the `0.0.1` release targets the `0.0.53` line of `pain001`.
 
 ## [Unreleased]
 
+### Changed
+
+- The hash-pinned development sets take this week's Dependabot
+  updates: ruff 0.17.6, hypothesis 6.170.17, filelock 4.3.1 (audit)
+  and soupsieve 4.1.3 (docs). The requirement inputs raise their
+  floors to the versions Dependabot proposed.
+- CI actions: github/codeql-action 4.39.4, ossf/scorecard-action
+  2.6.0, and Suite Consistency pins the core's ecosystem check at
+  `3286059`, the pain001 0.0.90 release.
+
 ## [0.0.90] - 2026-11-16
 
 ### Changed
